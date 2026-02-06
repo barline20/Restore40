@@ -19,7 +19,17 @@
     </p>
     <p>Maukah kamu mengikuti perjalanan kecil ini bersamaku?</p>
     <button onclick="goToScreen(2)">Ya, aku mau</button>
-    <button class="secondary" onclick="exitMessage()">Tidak sekarang</button>
+    <button class="secondary" onclick="goToScreen('exit')">Tidak sekarang</button>
+  </section>
+
+  <!-- EXIT SCREEN -->
+  <section class="screen" id="screen-exit">
+    <p class="slide-note">
+      Tidak apa-apa 🌿<br><br>
+      Kadang kita hanya perlu tahu bahwa tempat ini ada.<br>
+      Jika suatu hari kamu ingin kembali,<br>
+      <strong>Restore 40+</strong> akan tetap menunggumu.
+    </p>
   </section>
 
   <!-- SCREEN 2 -->
@@ -33,15 +43,37 @@
   <!-- SCREEN 3 -->
   <section class="screen" id="screen-3">
     <h2>Saat ini, peran utamamu apa?</h2>
-    <div class="options">
-      <label><input type="radio" name="job" value="Karyawan"> Karyawan / Pegawai</label>
-      <label><input type="radio" name="job" value="Pimpinan"> Pimpinan / Manager</label>
-      <label><input type="radio" name="job" value="Wirausaha"> Wirausaha</label>
-      <label><input type="radio" name="job" value="IRT"> Ibu Rumah Tangga</label>
-      <label><input type="radio" name="job" value="Caregiver"> Caregiver keluarga</label>
-      <label><input type="radio" name="job" value="Pensiunan"> Pensiunan aktif</label>
-      <label><input type="radio" name="job" value="Lainnya"> Lainnya</label>
+
+    <div class="option-card" onclick="selectJob(this)">
+      <input type="radio" name="job" value="Karyawan">
+      Karyawan / Pegawai
     </div>
+
+    <div class="option-card" onclick="selectJob(this)">
+      <input type="radio" name="job" value="Pimpinan">
+      Pimpinan / Manager
+    </div>
+
+    <div class="option-card" onclick="selectJob(this)">
+      <input type="radio" name="job" value="Wirausaha">
+      Wirausaha
+    </div>
+
+    <div class="option-card" onclick="selectJob(this)">
+      <input type="radio" name="job" value="IRT">
+      Ibu Rumah Tangga
+    </div>
+
+    <div class="option-card" onclick="selectJob(this)">
+      <input type="radio" name="job" value="Caregiver">
+      Caregiver keluarga
+    </div>
+
+    <div class="option-card" onclick="selectJob(this)">
+      <input type="radio" name="job" value="Pensiunan">
+      Pensiunan aktif
+    </div>
+
     <button onclick="goToScreen(4)">Lanjut</button>
   </section>
 
@@ -63,19 +95,30 @@
   <!-- SCREEN 6 -->
   <section class="screen" id="screen-6">
     <h2>Kita bisa berjalan bersama 🌱</h2>
+
     <p>
-      Karena kamu sudah jujur dan berani mendengarkan dirimu sendiri,
-      kamu mendapatkan <strong>akses gratis 1 bulan</strong>.
+      Restore 40+ adalah ruang pemulihan bagi mereka yang lelah karena terlalu banyak peran,
+      terlalu lama kuat, dan terlalu jarang berhenti.
     </p>
 
-    <ul>
-      <li><strong>Fisik:</strong> pijat, yoga pemula, nutrisi sehat</li>
-      <li><strong>Mental:</strong> journaling, deep talk, komunitas</li>
-      <li><strong>Sensorik:</strong> silence retreat, digital detox</li>
-    </ul>
+    <p class="soft">
+      Bukan untuk memperbaiki kamu.<br>
+      Tapi untuk menemani kamu pulih.
+    </p>
 
     <input type="text" placeholder="Nomor HP kamu">
-    <p class="soft">Terima kasih sudah jujur denganku 💛</p>
+    <button onclick="goToScreen('final')">Kirim & lanjutkan</button>
+  </section>
+
+  <!-- FINAL -->
+  <section class="screen" id="screen-final">
+    <p>
+      Terima kasih sudah jujur dan berani mendengarkan dirimu sendiri 🌿
+    </p>
+    <p class="soft">
+      Ingat, istirahat bukan hadiah.<br>
+      Ia adalah kebutuhan.
+    </p>
   </section>
 
 </div>
