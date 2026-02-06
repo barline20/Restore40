@@ -2,13 +2,12 @@ const screens = document.querySelectorAll(".screen");
 const questionContainer = document.getElementById("question-container");
 const resultBox = document.getElementById("result");
 
-function goToScreen(n) {
-  screens.forEach(s => s.classList.remove("active"));
-  document.getElementById(`screen-${n}`).classList.add("active");
-}
+let answers = {};
 
-function exitMessage() {
-  alert("Tidak apa-apa. Terima kasih sudah mampir 🌿");
+function goToScreen(id) {
+  screens.forEach(s => s.classList.remove("active"));
+  document.getElementById(`screen-${id}`)?.classList.add("active") ||
+  document.getElementById(id).classList.add("active");
 }
 
 function validateAge() {
@@ -16,48 +15,59 @@ function validateAge() {
   if (age >= 40 && age <= 65) {
     goToScreen(3);
   } else {
-    alert("Alat ini dirancang khusus untuk usia 40–65 tahun 🌱");
+    alert("Alat ini dirancang untuk usia 40–65 tahun 🌿");
   }
 }
 
-// Render questions
+function selectJob(el) {
+  document.querySelectorAll(".option-card").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
+  el.querySelector("input").checked = true;
+}
+
 questions.forEach(q => {
   const div = document.createElement("div");
-  div.className = "question";
   div.innerHTML = `
-    <p>${q.text}</p>
-    <div class="scale">
-      <label><input type="radio" name="q${q.id}" value="1"> Tidak</label>
-      <label><input type="radio" name="q${q.id}" value="2"> Terkadang</label>
-      <label><input type="radio" name="q${q.id}" value="3"> Ya</label>
+    <div class="question-card">
+      <strong>${q.text}</strong>
+      <div class="answer-btn" onclick="selectAnswer(this, ${q.id}, '${q.dim}', 1)">Tidak</div>
+      <div class="answer-btn" onclick="selectAnswer(this, ${q.id}, '${q.dim}', 2)">Terkadang</div>
+      <div class="answer-btn" onclick="selectAnswer(this, ${q.id}, '${q.dim}', 3)">Ya</div>
     </div>
   `;
   questionContainer.appendChild(div);
 });
 
+function selectAnswer(el, id, dim, val) {
+  el.parentElement.querySelectorAll(".answer-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  answers[id] = { dim, val };
+}
+
 function calculateResult() {
   let score = {};
-  questions.forEach(q => {
-    const val = document.querySelector(`input[name="q${q.id}"]:checked`);
-    if (val) {
-      score[q.dim] = (score[q.dim] || 0) + parseInt(val.value);
-    }
+
+  Object.values(answers).forEach(a => {
+    score[a.dim] = (score[a.dim] || 0) + a.val;
   });
 
-  let dominant = Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
+  const dominant = Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
+
+  const advice = {
+    Fisik: "Tubuhmu mungkin lelah bukan karena kurang kuat, tapi karena terlalu jarang benar-benar berhenti. Physical rest bisa dimulai dari tidur tanpa distraksi atau berbaring tanpa tujuan.",
+    Mental: "Pikiranmu tampak terus bekerja. Mental rest hadir saat kamu berhenti memproses—tanpa berita, tanpa tuntutan berpikir.",
+    Sensori: "Indramu mungkin kewalahan. Redupkan cahaya, kurangi suara, dan beri ruang hening meski hanya beberapa menit.",
+    Emosional: "Ada emosi yang lama tertahan. Emotional rest dimulai saat kamu boleh jujur tanpa harus terlihat kuat.",
+    Sosial: "Social rest bukan tentang menyendiri, tapi memilih relasi yang tidak menguras.",
+    Kreatif: "Kelelahan kreatif muncul saat hidup terlalu fungsional. Nikmati keindahan tanpa tujuan.",
+    Spiritual: "Spiritual rest hadir saat hidup kembali terasa bermakna—melalui refleksi, doa, atau diam."
+  };
 
   resultBox.innerHTML = `
     <p>
       Sepertinya bagian <strong>${dominant}</strong> dalam hidupmu sedang membutuhkan perhatian lebih.
     </p>
-    <p class="soft">
-      Kamu sudah berusaha keras menjalani semua peran ini.  
-      Mungkin sekarang waktunya memulihkan diri, pelan-pelan.
-    </p>
-    <p>
-      Saranku: mulai dengan satu langkah kecil hari ini —  
-      matikan HP 1 jam sebelum tidur, atau duduk diam 5 menit tanpa tuntutan apa pun.
-    </p>
+    <p class="soft">${advice[dominant]}</p>
   `;
 
   goToScreen(5);
