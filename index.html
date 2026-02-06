@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Restore 40+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- SCREEN 1 -->
+  <section class="screen active" id="screen-1">
+    <h1>Restore 40+</h1>
+    <p class="soft">
+      Halo…<br>
+      Aku di sini untuk mendengarkanmu.
+    </p>
+    <p>Maukah kamu mengikuti perjalanan kecil ini bersamaku?</p>
+    <button onclick="goToScreen(2)">Ya, aku mau</button>
+    <button class="secondary" onclick="exitMessage()">Tidak sekarang</button>
+  </section>
+
+  <!-- SCREEN 2 -->
+  <section class="screen" id="screen-2">
+    <h2>Kenalan dulu ya 🌿</h2>
+    <input type="text" id="name" placeholder="Namamu">
+    <input type="number" id="age" placeholder="Usiamu">
+    <button onclick="validateAge()">Lanjut</button>
+  </section>
+
+  <!-- SCREEN 3 -->
+  <section class="screen" id="screen-3">
+    <h2>Saat ini, peran utamamu apa?</h2>
+    <div class="options">
+      <label><input type="radio" name="job" value="Karyawan"> Karyawan / Pegawai</label>
+      <label><input type="radio" name="job" value="Pimpinan"> Pimpinan / Manager</label>
+      <label><input type="radio" name="job" value="Wirausaha"> Wirausaha</label>
+      <label><input type="radio" name="job" value="IRT"> Ibu Rumah Tangga</label>
+      <label><input type="radio" name="job" value="Caregiver"> Caregiver keluarga</label>
+      <label><input type="radio" name="job" value="Pensiunan"> Pensiunan aktif</label>
+      <label><input type="radio" name="job" value="Lainnya"> Lainnya</label>
+    </div>
+    <button onclick="goToScreen(4)">Lanjut</button>
+  </section>
+
+  <!-- SCREEN 4 -->
+  <section class="screen" id="screen-4">
+    <h2>Jawablah dengan jujur</h2>
+    <p class="soft">Tarik napas sebentar… lalu mulai 🌿</p>
+    <div id="question-container"></div>
+    <button onclick="calculateResult()">Cek Hasil</button>
+  </section>
+
+  <!-- SCREEN 5 -->
+  <section class="screen" id="screen-5">
+    <h2>Hasil Refleksimu</h2>
+    <div id="result"></div>
+    <button onclick="goToScreen(6)">Cek lebih lengkap</button>
+  </section>
+
+  <!-- SCREEN 6 -->
+  <section class="screen" id="screen-6">
+    <h2>Kita bisa berjalan bersama 🌱</h2>
+    <p>
+      Karena kamu sudah jujur dan berani mendengarkan dirimu sendiri,
+      kamu mendapatkan <strong>akses gratis 1 bulan</strong>.
+    </p>
+
+    <ul>
+      <li><strong>Fisik:</strong> pijat, yoga pemula, nutrisi sehat</li>
+      <li><strong>Mental:</strong> journaling, deep talk, komunitas</li>
+      <li><strong>Sensorik:</strong> silence retreat, digital detox</li>
+    </ul>
+
+    <input type="text" placeholder="Nomor HP kamu">
+    <p class="soft">Terima kasih sudah jujur denganku 💛</p>
+  </section>
+
+</div>
+
+<script src="data/questions.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
