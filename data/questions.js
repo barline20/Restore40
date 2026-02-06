@@ -1,15 +1,15 @@
 const questions = [
-  { id: 1, dim: "Physical", text: "Saya lebih memilih tidur daripada mengerjakan satu tugas lagi." },
-  { id: 2, dim: "Physical", text: "Badan terasa capek tapi sulit tidur nyenyak." },
-  { id: 3, dim: "Physical", text: "Jam tidur saya sering kurang dari yang ideal." },
+  { id: 1, dim: "Fisik", text: "Saya lebih memilih tidur daripada mengerjakan satu tugas lagi." },
+  { id: 2, dim: "Fisik", text: "Badan terasa capek tapi sulit tidur nyenyak." },
+  { id: 3, dim: "Fisik", text: "Jam tidur saya sering kurang dari yang ideal." },
 
   { id: 4, dim: "Mental", text: "Masalah kecil membuat saya mudah emosi." },
   { id: 5, dim: "Mental", text: "Pikiran saya sulit berhenti saat waktunya istirahat." },
   { id: 6, dim: "Mental", text: "Saya sering merasa lelah meski tidak melakukan banyak hal." },
 
-  { id: 7, dim: "Emotional", text: "Saya lebih sering menyimpan perasaan sendiri." },
-  { id: 8, dim: "Emotional", text: "Memikirkan hidup membuat hati terasa berat." },
-  { id: 9, dim: "Emotional", text: "Saya merasa harus selalu kuat." },
+  { id: 7, dim: "Emosional", text: "Saya lebih sering menyimpan perasaan sendiri." },
+  { id: 8, dim: "Emosional", text: "Memikirkan hidup membuat hati terasa berat." },
+  { id: 9, dim: "Emosional", text: "Saya merasa harus selalu kuat." },
 
   { id: 10, dim: "Sosial", text: "Saya merasa harus tampil baik-baik saja di depan orang." },
   { id: 11, dim: "Sosial", text: "Saya menghindari pertemuan sosial." },
