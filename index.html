@@ -1,178 +1,128 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Restore 40+</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
 <div id="app">
 
-<!-- ================= SCREEN 1 ================= -->
+<!-- SCREEN 1 -->
 <section class="screen active" id="screen-1">
-  <h1>Restore 40+</h1>
+  <h1>🌿 Restore 40+</h1>
   <p class="soft">
-    Halo,<br>
-    saya di sini untuk mendengarkan Anda.
+    Hai,<br>
+    Saya di sini untuk mendengarkan Anda 🤍
   </p>
   <p>
-    Apakah Anda bersedia mengikuti perjalanan kecil ini<br>
+    Apakah Anda bersedia memulai perjalanan kecil ini<br>
     untuk memahami dan memulihkan diri?
   </p>
   <button onclick="goTo(2)">Ya, saya bersedia</button>
   <button class="secondary" onclick="goTo('exit')">Tidak sekarang</button>
 </section>
 
-<!-- ================= EXIT ================= -->
+<!-- EXIT -->
 <section class="screen" id="screen-exit">
-  <p class="center soft">
-    Tidak apa-apa 🌿<br><br>
-    Terkadang, mengetahui bahwa ada ruang untuk beristirahat saja sudah cukup.<br>
+  <p class="soft center">
+    Tidak apa-apa 🌱<br><br>
+    Kadang, mengetahui bahwa ada ruang untuk beristirahat saja sudah cukup.<br>
     Jika suatu hari Anda ingin kembali,<br>
     <strong>Restore 40+</strong> akan tetap ada.
   </p>
 </section>
 
-<!-- ================= SCREEN 2 ================= -->
+<!-- SCREEN 2 -->
 <section class="screen" id="screen-2">
-  <h2>Mari berkenalan</h2>
-  <input id="name" placeholder="Nama Anda">
-  <input id="age" placeholder="Usia Anda (dirancang untuk usia 40–59 tahun)">
-  <button onclick="goTo(3)">Lanjut</button>
+  <h2>🤍 Mari berkenalan</h2>
+  <input id="name" placeholder="Nama Anda"/>
+  <input id="age" placeholder="Usia Anda (dirancang untuk usia 40–59 tahun)"/>
+  <div class="nav">
+    <button class="secondary" onclick="goTo(1)">Kembali</button>
+    <button onclick="goTo(3)">Lanjut</button>
+  </div>
 </section>
 
-<!-- ================= SCREEN 3 ================= -->
+<!-- SCREEN 3 -->
 <section class="screen" id="screen-3">
-  <h2>Saat ini, apa peran utama Anda?</h2>
+  <h2>🌱 Saat ini, apa peran utama Anda?</h2>
 
-  <div class="option" onclick="pick(this)">
-    <input type="radio" name="job"> Karyawan / Pegawai
-  </div>
-  <div class="option" onclick="pick(this)">
-    <input type="radio" name="job"> Pimpinan / Manajer
-  </div>
-  <div class="option" onclick="pick(this)">
-    <input type="radio" name="job"> Wirausaha
-  </div>
-  <div class="option" onclick="pick(this)">
-    <input type="radio" name="job"> Ibu Rumah Tangga
-  </div>
-  <div class="option" onclick="pick(this)">
-    <input type="radio" name="job"> Caregiver keluarga
-  </div>
-  <div class="option" onclick="pick(this)">
-    <input type="radio" name="job"> Lainnya
-  </div>
+  <div class="option" onclick="pick(this)">Karyawan / Pegawai</div>
+  <div class="option" onclick="pick(this)">Pimpinan / Manajer</div>
+  <div class="option" onclick="pick(this)">Wirausaha</div>
+  <div class="option" onclick="pick(this)">Ibu Rumah Tangga</div>
+  <div class="option" onclick="pick(this)">Caregiver keluarga</div>
+  <div class="option" onclick="pick(this)">Lainnya</div>
 
-  <button onclick="goTo(4)">Mulai</button>
+  <input id="customJob" placeholder="Tuliskan peran Anda" style="display:none"/>
+
+  <div class="nav">
+    <button class="secondary" onclick="goTo(2)">Kembali</button>
+    <button onclick="goTo(4)">Mulai</button>
+  </div>
 </section>
 
-<!-- ================= QUESTIONS ================= -->
+<!-- SCREEN 4 -->
 <section class="screen" id="screen-4">
-  <h2>Jawablah dengan jujur</h2>
-  <p class="soft">
-    Tidak ada jawaban benar atau salah.<br>
-    Jawablah sesuai dengan kondisi Anda saat ini.
-  </p>
-
+  <h2>🕊️ Jawablah dengan jujur</h2>
+  <p class="soft">Tidak ada jawaban benar atau salah.</p>
   <div id="questions"></div>
-
   <button onclick="checkAnswers()">Lihat Refleksi</button>
 </section>
 
-<!-- ================= RESULT ================= -->
+<!-- SCREEN 5 -->
 <section class="screen" id="screen-5">
-  <h2>Refleksi Anda</h2>
-
+  <h2>✨ Refleksi Anda</h2>
   <div id="result"></div>
-
-  <p class="soft">
-    Refleksi ini bukan penilaian,<br>
-    melainkan undangan untuk lebih memperhatikan diri Anda.
-  </p>
-
   <button onclick="goTo(6)">Lanjutkan</button>
 </section>
 
-<!-- ================= JOIN ================= -->
+<!-- SCREEN 6 -->
 <section class="screen" id="screen-6">
-  <h2>Kini, kita bisa berjalan bersama 🌱</h2>
-
-  <p>
-    Restore 40+ bukan dibuat untuk memperbaiki Anda,<br>
-    melainkan menemani Anda pulih dengan ritme yang manusiawi.
-  </p>
-
+  <h2>🤍 Kini, kita bisa berjalan bersama</h2>
   <p class="soft">
-    Jika Anda ingin melanjutkan perjalanan ini bersama kami,<br>
-    silakan tinggalkan nomor yang bisa kami hubungi.
+    Restore 40+ bukan untuk memperbaiki Anda,<br>
+    tetapi menemani Anda pulih secara utuh.
   </p>
-
-  <input placeholder="Nomor HP Anda">
-  <button onclick="goTo(7)">Mulai Pemulihan</button>
+  <input placeholder="Nomor HP Anda"/>
+  <button>Submit</button>
+  <button onclick="goTo(7)">Mulai Perjalanan</button>
 </section>
 
-<!-- ================= DAY OVERVIEW ================= -->
+<!-- SCREEN 7 -->
 <section class="screen" id="screen-7">
-  <h2>Mari kita mulai proses pemulihan Anda</h2>
-
-  <p class="soft">
-    Lima hari pertama ini dirancang sederhana,<br>
-    agar Anda bisa berjalan pelan tanpa tekanan.
-  </p>
-
-  <div class="day active" onclick="openDay(1)">Day 1 · Menenangkan Pikiran</div>
-  <div class="day locked">Day 2 · Merawat Tubuh</div>
-  <div class="day locked">Day 3 · Mengistirahatkan Indra</div>
-  <div class="day locked">Day 4 · Menyentuh Makna</div>
-  <div class="day locked">Day 5 · Menghidupkan Kreativitas</div>
+  <h2>🌿 Mari kita mulai proses pemulihan Anda</h2>
+  <div class="day active" onclick="openDay(1)">Day 1 · Mental Rest</div>
+  <div class="day locked">Day 2 · Physical Rest</div>
+  <div class="day locked">Day 3 · Sensory Rest</div>
+  <div class="day locked">Day 4 · Spiritual & Social Rest</div>
+  <div class="day locked">Day 5 · Creative Rest</div>
 </section>
 
-<!-- ================= DAY DETAIL ================= -->
+<!-- DAY DETAIL -->
 <section class="screen" id="screen-day">
   <h2 id="dayTitle"></h2>
-
   <p id="dayIntro" class="soft"></p>
-
   <ul id="journalPrompts"></ul>
-
-  <textarea
-    id="journalText"
-    rows="6"
-    placeholder="Tuliskan refleksi Anda di sini..."></textarea>
-
+  <textarea id="journalText" rows="6" placeholder="Tuliskan refleksi Anda di sini..."></textarea>
   <button onclick="submitJournal()">Submit</button>
 </section>
 
-<!-- ================= FINAL & PACKAGES ================= -->
+<!-- FINAL -->
 <section class="screen" id="screen-final">
-  <h2>Terima kasih telah berjalan sejauh ini 🌿</h2>
-
-  <p>
-    Lima hari ini mungkin tidak menghapus semua lelah,<br>
-    tetapi Anda telah memberi ruang bagi diri sendiri.
-  </p>
-
+  <h2>🌱 Terima kasih telah berjalan sejauh ini</h2>
   <p class="soft">
-    Berdasarkan perjalanan dan refleksi Anda,<br>
-    berikut pilihan lanjutan yang mungkin relevan:
+    Bagaimana perjalanan 5 hari pemulihan Anda bersama kami?
   </p>
-
   <div id="packages"></div>
-
-  <p class="soft">
-    Tidak perlu memutuskan sekarang.<br>
-    Dengarkan kembali kebutuhan Anda.
-  </p>
 </section>
 
 </div>
 
-<!-- ================= SCRIPTS ================= -->
 <script src="data/questions.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
