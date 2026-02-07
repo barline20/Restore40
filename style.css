@@ -1,71 +1,51 @@
 body {
-  font-family: "Segoe UI", sans-serif;
-  background: #f4f6f1;
-  color: #2f3e34;
+  font-family: system-ui, sans-serif;
+  background: #f4f7f3;
+  color: #2f3e46;
 }
 
-#app {
-  max-width: 640px;
+.screen {
+  display: none;
+  max-width: 600px;
   margin: auto;
-  padding: 30px;
+  padding: 40px 20px;
 }
 
-.screen { display: none; }
-.screen.active { display: block; }
+.screen.active {
+  display: block;
+}
 
 button {
-  width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  border: none;
   background: #588157;
   color: white;
-  margin-top: 16px;
-}
-
-.secondary {
-  background: transparent;
-  color: #588157;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
+  padding: 12px;
+  border: none;
   border-radius: 10px;
-  border: 1px solid #ccd5ae;
+  width: 100%;
+  margin-top: 12px;
 }
 
-.option {
-  border: 1px solid #ccd5ae;
-  padding: 14px;
+button.secondary {
+  background: transparent;
+  border: 1px solid #aaa;
+  color: #555;
+}
+
+.option, .day, .question-card, .answer-btn, .package {
+  border: 1px solid #cbd5c0;
   border-radius: 12px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin: 8px 0;
 }
 
-.option.active {
+.option.active, .answer-btn.active, .day.active {
   background: #e9f5ec;
-}
-
-.day {
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid #ccd5ae;
-  margin-bottom: 10px;
 }
 
 .day.locked {
   opacity: 0.4;
 }
 
-.package {
-  border: 1px solid #ccd5ae;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 14px;
+.soft {
+  color: #555;
 }
-.package.recommended {
-  border: 2px solid #588157;
-  background: #e9f5ec;
-}
-
