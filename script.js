@@ -1,6 +1,6 @@
-/* ===============================
+/* ======================================================
    GLOBAL STATE
-================================ */
+====================================================== */
 
 const screens = document.querySelectorAll(".screen");
 const qBox = document.getElementById("questions");
@@ -15,28 +15,22 @@ let journalData = {};
 let selectedJob = "";
 let customJob = "";
 
-/* ===============================
-   NAVIGASI
-================================ */
+/* ======================================================
+   NAVIGASI LAYAR
+====================================================== */
 
 function goTo(id) {
   screens.forEach(s => s.classList.remove("active"));
   document.getElementById(`screen-${id}`).classList.add("active");
 }
 
-function goBack(from, to) {
-  document.getElementById(`screen-${from}`).classList.remove("active");
-  document.getElementById(`screen-${to}`).classList.add("active");
-}
-
-/* ===============================
-   SCREEN 3 – PERAN
-================================ */
+/* ======================================================
+   SCREEN 3 – PILIH PERAN
+====================================================== */
 
 function pick(el) {
   document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
   el.classList.add("active");
-
   selectedJob = el.innerText.trim();
 
   const customInput = document.getElementById("customJob");
@@ -52,15 +46,14 @@ function saveCustomJob(val) {
   customJob = val;
 }
 
-/* ===============================
+/* ======================================================
    RENDER PERTANYAAN
-================================ */
+====================================================== */
 
 questions.forEach(q => {
   qBox.innerHTML += `
     <div class="question-card">
       <p><strong>${q.text}</strong></p>
-
       <div class="answer-btn" onclick="answer(${q.id}, '${q.dim}', 3, this)">Ya</div>
       <div class="answer-btn" onclick="answer(${q.id}, '${q.dim}', 2, this)">Terkadang</div>
       <div class="answer-btn" onclick="answer(${q.id}, '${q.dim}', 1, this)">Tidak</div>
@@ -70,19 +63,18 @@ questions.forEach(q => {
 
 function answer(id, dim, val, el) {
   answers[id] = { dim, val };
-
   const parent = el.parentElement;
   parent.querySelectorAll(".answer-btn").forEach(b => b.classList.remove("active"));
   el.classList.add("active");
 }
 
-/* ===============================
-   HITUNG HASIL
-================================ */
+/* ======================================================
+   HITUNG SKOR & TENTUKAN SACRED REST DOMINAN
+====================================================== */
 
 function checkAnswers() {
   if (Object.keys(answers).length < questions.length) {
-    alert("🌿 Masih ada pernyataan yang belum terjawab.");
+    alert("🌿 Masih ada pernyataan yang belum dijawab.");
     return;
   }
 
@@ -99,25 +91,66 @@ function checkAnswers() {
   goTo(5);
 }
 
-/* ===============================
-   HASIL REFLEKSI (REKAN SEPERJALANAN)
-================================ */
+/* ======================================================
+   HASIL REFLEKSI + SOLUSI (SACRED REST)
+====================================================== */
 
 function renderResult() {
   const reflection = {
-    Physical: "🌿 Tubuh Anda sudah lama bekerja tanpa cukup jeda. Bukan karena Anda lemah, tetapi karena Anda setia menjalani banyak peran.",
-    Mental: "🕊️ Pikiran Anda tampak terus aktif. Ini sering terjadi pada mereka yang terbiasa bertanggung jawab dan jarang memberi ruang berhenti.",
-    Emotional: "💛 Ada perasaan yang lama disimpan. Menahan memang membuat kita bertahan, tetapi juga melelahkan hati.",
-    Sensory: "🌱 Indra Anda mungkin terlalu lama terpapar. Kepekaan ini bukan masalah, melainkan sinyal untuk beristirahat.",
-    Social: "🤍 Anda banyak memberi ruang bagi orang lain, namun jarang memiliki ruang aman untuk diri sendiri.",
-    Creative: "✨ Kreativitas Anda tidak hilang. Ia hanya menunggu ruang yang lebih lembut.",
-    Spiritual: "🕯️ Ada kerind packaging dengan makna dan keterhubungan yang lebih dalam."
+    Fisik: `
+      🌿 Tubuh Anda tampaknya telah bekerja lebih lama daripada yang ia mampu.
+      Dalam Sacred Rest, ini adalah tanda bahwa tubuh membutuhkan
+      <strong>physical rest</strong>—bukan sekadar tidur,
+      tetapi ritme hidup yang lebih ramah bagi tubuh.
+      <br><br>
+      Solusi awal: perlambat tempo, beri jeda sadar, dan dengarkan sinyal tubuh.
+    `,
+    Mental: `
+      🕊️ Pikiran Anda terlihat terus aktif, bahkan saat tubuh ingin berhenti.
+      Ini selaras dengan kebutuhan <strong>mental rest</strong>,
+      yaitu membebaskan pikiran dari proses berpikir tanpa henti.
+      <br><br>
+      Solusi awal: menurunkan tuntutan berpikir dan memberi ruang hening.
+    `,
+    Emosional: `
+      💛 Ada emosi yang selama ini Anda tahan sendiri.
+      Sacred Rest menyebut ini sebagai kebutuhan <strong>emotional rest</strong>,
+      yaitu ruang untuk jujur pada perasaan tanpa harus kuat terus-menerus.
+      <br><br>
+      Solusi awal: mengakui perasaan tanpa menghakimi diri.
+    `,
+    Sensori: `
+      🌱 Indra Anda mungkin terlalu lama terpapar rangsangan.
+      Ini menunjukkan kebutuhan <strong>sensory rest</strong>:
+      mengurangi kebisingan, layar, dan stimulasi berlebih.
+      <br><br>
+      Solusi awal: ciptakan momen sunyi dan lembut bagi indra.
+    `,
+    Sosial: `
+      🤍 Anda banyak memberi ruang untuk orang lain,
+      namun jarang memiliki relasi yang benar-benar memulihkan.
+      Ini berkaitan dengan <strong>social rest</strong>.
+      <br><br>
+      Solusi awal: membedakan relasi yang menguras dan yang menguatkan.
+    `,
+    Kreatif: `
+      ✨ Kreativitas Anda tidak hilang.
+      Sacred Rest melihat ini sebagai kebutuhan <strong>creative rest</strong>,
+      yaitu terhubung kembali dengan keindahan tanpa tuntutan hasil.
+      <br><br>
+      Solusi awal: izinkan diri menikmati tanpa tujuan produktif.
+    `,
+    Spiritual: `
+      🕯️ Ada kerinduan akan makna dan keterhubungan yang lebih dalam.
+      Ini selaras dengan <strong>spiritual rest</strong>—
+      merasa terhubung dengan nilai, iman, atau tujuan hidup.
+      <br><br>
+      Solusi awal: meluangkan waktu untuk refleksi makna.
+    `
   };
 
-  let html = `
-    <p><strong>Refleksi untuk Anda 🌿</strong></p>
-    <p>${reflection[dominantRests[0]]}</p>
-  `;
+  let html = `<p><strong>Refleksi untuk Anda 🌿</strong></p>`;
+  html += `<p>${reflection[dominantRests[0]]}</p>`;
 
   if (dominantRests[1]) {
     html += `<p>${reflection[dominantRests[1]]}</p>`;
@@ -125,62 +158,62 @@ function renderResult() {
 
   html += `
     <p class="soft">
-      Saya di sini bukan untuk menilai Anda,<br>
-      tetapi menemani Anda memahami apa yang sedang dibutuhkan.
+      Refleksi ini bukan penilaian,
+      melainkan undangan untuk merawat diri dengan lebih sadar.
     </p>
   `;
 
   resultBox.innerHTML = html;
 }
 
-/* ===============================
-   DAY 1–5 (JOURNALING TERPANDU)
-================================ */
+/* ======================================================
+   DAY 1–5 (ANJURAN SACRED REST TERSTRUKTUR)
+====================================================== */
 
 const dayContent = {
   1: {
-    title: "Day 1 · Menenangkan Pikiran 🕊️",
-    intro: "Hari ini, kita memberi ruang bagi pikiran yang selama ini terus bekerja.",
+    title: "Day 1 · Mental Rest 🕊️",
+    intro: "Hari ini kita menenangkan pikiran yang terlalu lama bekerja.",
     prompts: [
       "Apa yang paling memenuhi pikiran Anda akhir-akhir ini?",
-      "Hal apa yang membuat Anda sulit benar-benar beristirahat?",
-      "Jika pikiran Anda bisa berbicara, apa yang ingin ia sampaikan?"
+      "Hal apa yang membuat Anda sulit benar-benar berhenti?",
+      "Apa yang ingin pikiran Anda sampaikan jika diberi ruang?"
     ]
   },
   2: {
-    title: "Day 2 · Merawat Tubuh 🌿",
-    intro: "Tubuh sering berbicara melalui rasa lelah.",
+    title: "Day 2 · Physical Rest 🌿",
+    intro: "Hari ini kita belajar mendengarkan tubuh.",
     prompts: [
       "Bagian tubuh mana yang terasa paling lelah?",
-      "Kapan terakhir kali Anda benar-benar berhenti?",
-      "Apa satu bentuk perhatian kecil untuk tubuh hari ini?"
+      "Kapan terakhir kali Anda beristirahat tanpa rasa bersalah?",
+      "Apa satu hal kecil yang bisa Anda lakukan untuk tubuh hari ini?"
     ]
   },
   3: {
-    title: "Day 3 · Mengistirahatkan Indra 🌱",
-    intro: "Indra juga membutuhkan jeda.",
+    title: "Day 3 · Sensory Rest 🌱",
+    intro: "Hari ini kita memberi jeda pada indra.",
     prompts: [
       "Rangsangan apa yang paling menguras Anda?",
-      "Kapan terakhir kali Anda menikmati keheningan?",
+      "Bagaimana rasanya berada dalam keheningan?",
       "Apa yang terasa menenangkan bagi indra Anda?"
     ]
   },
   4: {
-    title: "Day 4 · Menyentuh Makna 🕯️",
-    intro: "Makna sering hadir dalam hal sederhana.",
+    title: "Day 4 · Spiritual & Social Rest 🕯️",
+    intro: "Hari ini kita menyentuh makna dan relasi.",
     prompts: [
-      "Hal kecil apa yang memberi makna akhir-akhir ini?",
-      "Peran apa yang paling menguras energi batin Anda?",
-      "Jika hari ini tidak harus produktif, apa yang ingin Anda lakukan?"
+      "Hal apa yang memberi makna bagi hidup Anda?",
+      "Relasi mana yang terasa menguatkan?",
+      "Apa yang membuat Anda merasa terhubung?"
     ]
   },
   5: {
-    title: "Day 5 · Menghidupkan Kreativitas ✨",
-    intro: "Kreativitas adalah tanda kehidupan.",
+    title: "Day 5 · Creative Rest ✨",
+    intro: "Hari ini kita menghidupkan kembali rasa kagum.",
     prompts: [
-      "Kapan terakhir kali Anda merasa hidup?",
+      "Kapan terakhir kali Anda menikmati sesuatu tanpa tujuan?",
       "Keindahan apa yang akhir-akhir ini terlewat?",
-      "Apa yang ingin Anda nikmati tanpa tuntutan?"
+      "Apa yang membuat Anda merasa hidup?"
     ]
   }
 };
@@ -204,12 +237,11 @@ function submitJournal() {
   const text = document.getElementById("journalText").value.trim();
 
   if (!text) {
-    alert("🌿 Tidak perlu panjang. Satu kalimat pun cukup berarti.");
+    alert("🌿 Tidak perlu panjang. Satu kalimat pun cukup.");
     return;
   }
 
   journalData[currentDay] = text;
-
   alert("✨ Terima kasih telah memberi ruang untuk diri Anda hari ini.");
 
   currentDay++;
@@ -223,9 +255,9 @@ function submitJournal() {
   }
 }
 
-/* ===============================
-   PAKET – PERSONALISASI
-================================ */
+/* ======================================================
+   PAKET – KONSISTEN SACRED REST
+====================================================== */
 
 function renderPackages() {
   const map = {
@@ -242,8 +274,8 @@ function renderPackages() {
 
   packageBox.innerHTML = `
     <p class="soft">
-      Berdasarkan perjalanan Anda, paket berikut
-      <strong>mungkin paling relevan</strong> 🌿
+      Berdasarkan refleksi Anda,
+      paket berikut <strong>mungkin paling relevan</strong> 🌿
     </p>
     ${renderPackage("Tenang", recommended)}
     ${renderPackage("Bertumbuh", recommended)}
@@ -253,9 +285,9 @@ function renderPackages() {
 
 function renderPackage(name, recommended) {
   const data = {
-    Tenang: ["Ruang menenangkan pikiran & emosi", "Rp199.000", "Rp299.000"],
-    Bertumbuh: ["Pendampingan reflektif & peran hidup", "Rp349.000", "Rp499.000"],
-    Menyeluruh: ["Pendampingan utuh lintas aspek", "Rp599.000", "Rp799.000"]
+    Tenang: ["Fokus Mental, Emotional, Sensory Rest", "Rp199.000", "Rp299.000"],
+    Bertumbuh: ["Fokus Social & Spiritual Rest", "Rp349.000", "Rp499.000"],
+    Menyeluruh: ["Pendampingan seluruh Sacred Rest", "Rp599.000", "Rp799.000"]
   };
 
   return `
