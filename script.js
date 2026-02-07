@@ -1,76 +1,90 @@
 const screens = document.querySelectorAll(".screen");
 const qBox = document.getElementById("questions");
 const resultBox = document.getElementById("result");
+const packageBox = document.getElementById("packages");
 
 let answers = {};
+let scores = {};
+let dominantRests = [];
 let currentDay = 1;
 
-function goTo(n) {
+function goTo(id) {
   screens.forEach(s => s.classList.remove("active"));
-  document.getElementById(`screen-${n}`).classList.add("active");
+  document.getElementById(`screen-${id}`).classList.add("active");
 }
 
-function pick(el){
-  document.querySelectorAll(".option").forEach(o=>o.classList.remove("active"));
-  el.classList.add("active");
-}
-
-questions.forEach(q=>{
+/* ======================
+   RENDER QUESTIONS
+====================== */
+questions.forEach(q => {
   qBox.innerHTML += `
-    <div class="question">
+    <div class="question-card">
       <strong>${q.text}</strong>
-      <div onclick="answer(${q.id}, '${q.dim}', 3)">Ya</div>
-      <div onclick="answer(${q.id}, '${q.dim}', 2)">Terkadang</div>
-      <div onclick="answer(${q.id}, '${q.dim}', 1)">Tidak</div>
+
+      <div class="answer-btn" onclick="answer(${q.id}, '${q.dim}', 3)">Ya</div>
+      <div class="answer-btn" onclick="answer(${q.id}, '${q.dim}', 2)">Terkadang</div>
+      <div class="answer-btn" onclick="answer(${q.id}, '${q.dim}', 1)">Tidak</div>
     </div>
   `;
 });
 
-function answer(id, dim, val){
-  answers[id] = {dim, val};
+function answer(id, dim, val) {
+  answers[id] = { dim, val };
 }
 
-function checkAnswers(){
-  if(Object.keys(answers).length < questions.length){
-    alert("Anda belum menjawab semua pertanyaan.");
+/* ======================
+   HITUNG HASIL
+====================== */
+function checkAnswers() {
+  if (Object.keys(answers).length < questions.length) {
+    alert("Anda belum mengisi seluruh pernyataan.");
     return;
   }
 
-  let score = {};
-  Object.values(answers).forEach(a=>{
-    score[a.dim] = (score[a.dim] || 0) + a.val;
+  scores = {};
+  Object.values(answers).forEach(a => {
+    scores[a.dim] = (scores[a.dim] || 0) + a.val;
   });
 
-  let dominant = Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
+  dominantRests = Object.keys(scores)
+    .sort((a, b) => scores[b] - scores[a])
+    .slice(0, 2);
 
-  const reflections = {
-    Physical: "Tubuh Anda tampaknya sudah lama menahan lelah...",
-    Mental: "Pikiran Anda mungkin belum benar-benar mendapat ruang istirahat...",
-    Emotional: "Ada banyak perasaan yang selama ini Anda simpan sendiri...",
-    Sensory: "Indra Anda mungkin telah terlalu lama bekerja tanpa jeda...",
-    Social: "Hubungan sosial Anda mungkin lebih banyak menguras daripada menguatkan...",
-    Creative: "Ketika ide terasa macet, bukan berarti Anda kehilangan kreativitas...",
-    Spiritual: "Ada bagian terdalam dari diri Anda yang mungkin rindu disentuh kembali..."
-  };
-
-  resultBox.innerHTML = `<p>${reflections[dominant]}</p>`;
+  renderResult();
   goTo(5);
 }
 
-function openDay(day){
-  if(day !== currentDay) return;
-  document.getElementById("dayTitle").innerText = `Day ${day}`;
-  document.getElementById("dayGuide").innerText =
-    day === 1 ? "Luangkan 10 menit untuk menuliskan apa yang paling memenuhi pikiran Anda hari ini." :
-    day === 2 ? "Perhatikan tubuh Anda hari ini..." :
-    day === 3 ? "Kurangi rangsangan indra..." :
-    day === 4 ? "Renungkan hal yang memberi makna..." :
-    "Nikmati keindahan tanpa tujuan.";
-  goTo("day");
-}
-
-function finishDay(){
-  currentDay++;
-  document.querySelectorAll(".day")[currentDay-1]?.classList.remove("locked");
-  goTo(7);
-}
+/* ======================
+   HASIL REFLEKSI PANJANG
+====================== */
+function renderResult() {
+  const reflectionText = {
+    Physical: `
+      Tubuh Anda tampaknya telah bekerja lebih lama daripada yang ia mampu.
+      Ketika lelah fisik muncul, sering kali itu bukan karena kurang kuat,
+      melainkan karena terlalu jarang berhenti dengan sadar.
+    `,
+    Mental: `
+      Pikiran Anda terlihat terus aktif, bahkan saat tubuh ingin beristirahat.
+      Ini bukan tanda kelemahan, melainkan tanda tanggung jawab yang terlalu lama dipikul sendirian.
+    `,
+    Emotional: `
+      Ada banyak hal yang Anda simpan di dalam diri.
+      Menahan emosi memang membuat kita tetap berjalan,
+      tetapi juga perlahan menguras tenaga batin.
+    `,
+    Sensory: `
+      Indra Anda mungkin telah terlalu lama terpapar—suara, layar, tuntutan.
+      Kepekaan ini bukan masalah, justru tanda bahwa tubuh Anda meminta jeda.
+    `,
+    Social: `
+      Anda tampaknya sering memberi ruang untuk orang lain,
+      tetapi jarang mendapat ruang aman untuk menjadi diri sendiri.
+    `,
+    Creative: `
+      Ketika ide terasa buntu, bukan berarti Anda kehilangan kreativitas.
+      Bisa jadi kreativitas Anda hanya belum diberi ruang yang tepat untuk bernapas.
+    `,
+    Spiritual: `
+      Ada bagian terdalam dari diri Anda yang mungkin sedang mencari makna,
+      bukan
