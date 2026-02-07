@@ -1,25 +1,38 @@
 const questions = [
-  { id: 1, dim: "Fisik", text: "Saya lebih memilih tidur daripada mengerjakan satu tugas lagi." },
-  { id: 2, dim: "Fisik", text: "Badan terasa capek tapi sulit tidur nyenyak." },
+  // A. Badan Capek
+  { id: 1, dim: "Fisik", text: "Dalam pilihan antara tidur atau mengerjakan satu tugas lagi, saya lebih memilih tidur." },
+  { id: 2, dim: "Fisik", text: "Badan saya sering terasa capek, tetapi sulit untuk langsung tidur nyenyak." },
   { id: 3, dim: "Fisik", text: "Jam tidur saya sering kurang dari yang ideal." },
 
-  { id: 4, dim: "Mental", text: "Masalah kecil membuat saya mudah emosi." },
-  { id: 5, dim: "Mental", text: "Pikiran saya sulit berhenti saat waktunya istirahat." },
-  { id: 6, dim: "Mental", text: "Saya sering merasa lelah meski tidak melakukan banyak hal." },
+  // B. Pikiran Capek
+  { id: 4, dim: "Mental", text: "Masalah kecil sering kali membuat saya mudah emosi." },
+  { id: 5, dim: "Mental", text: "Saya lebih sering membayangkan hidup ideal daripada menghadapi kenyataan hidup yang ada." },
+  { id: 6, dim: "Mental", text: "Saat waktunya tidur, pikiran saya masih terus berjalan." },
 
-  { id: 7, dim: "Emosional", text: "Saya lebih sering menyimpan perasaan sendiri." },
-  { id: 8, dim: "Emosional", text: "Memikirkan hidup membuat hati terasa berat." },
-  { id: 9, dim: "Emosional", text: "Saya merasa harus selalu kuat." },
+  // C. Hati Capek
+  { id: 7, dim: "Emosional", text: "Saya lebih sering mengingat kegagalan daripada keberhasilan." },
+  { id: 8, dim: "Emosional", text: "Memikirkan arah hidup membuat hati saya terasa berat." },
+  { id: 9, dim: "Emosional", text: "Saya cenderung melihat sisi berat dari kehidupan." },
 
-  { id: 10, dim: "Sosial", text: "Saya merasa harus tampil baik-baik saja di depan orang." },
-  { id: 11, dim: "Sosial", text: "Saya menghindari pertemuan sosial." },
+  // D. Sosial & Makna
+  { id: 10, dim: "Sosial", text: "Saya merasa harus tampil ‘baik-baik saja’ di depan orang lain." },
+  { id: 11, dim: "Sosial", text: "Saya lebih memilih menghindari acara kebersamaan." },
+  { id: 12, dim: "Spiritual", text: "Ketika membutuhkan bantuan, saya bingung harus menghubungi siapa." },
 
-  { id: 12, dim: "Sensori", text: "Suara atau cahaya mudah membuat saya tidak nyaman." },
-  { id: 13, dim: "Sensori", text: "Saya menatap layar hampir sepanjang hari." },
+  // E. Indra Capek
+  { id: 13, dim: "Sensori", text: "Suara berisik membuat saya tidak nyaman." },
+  { id: 14, dim: "Sensori", text: "Saya menatap layar monitor hampir sepanjang hari." },
+  { id: 15, dim: "Sensori", text: "Saya kurang peka terhadap bau di sekitar." },
+  { id: 16, dim: "Sensori", text: "Saya lebih memilih makanan instan atau minuman manis." },
+  { id: 17, dim: "Sensori", text: "Sentuhan fisik membuat saya tidak nyaman." },
 
-  { id: 14, dim: "Kreatif", text: "Saya merasa kehilangan ide atau semangat berkarya." },
-  { id: 15, dim: "Kreatif", text: "Saya jarang menikmati keindahan tanpa tujuan." },
+  // F. Peran Hidup
+  { id: 18, dim: "Emosional", text: "Saya lebih mendahulukan kepentingan orang lain daripada diri saya sendiri." },
+  { id: 19, dim: "Emosional", text: "Ketika meluangkan waktu untuk diri sendiri, saya sering merasa bersalah." },
+  { id: 20, dim: "Emosional", text: "Saya merasa usaha saya sering kurang dihargai orang lain." },
 
-  { id: 16, dim: "Spiritual", text: "Saya merasa hidup terasa kosong atau kehilangan makna." },
-  { id: 17, dim: "Spiritual", text: "Saya jarang berhenti untuk refleksi atau doa." }
+  // G. Capek Kreatif
+  { id: 21, dim: "Kreatif", text: "Mendapatkan ide baru terasa sulit bagi saya." },
+  { id: 22, dim: "Kreatif", text: "Saya tidak merasa kreatif." },
+  { id: 23, dim: "Kreatif", text: "Saat ini saya membutuhkan semangat dan inspirasi." }
 ];
