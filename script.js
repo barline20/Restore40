@@ -1,74 +1,76 @@
 const screens = document.querySelectorAll(".screen");
-const questionContainer = document.getElementById("question-container");
+const qBox = document.getElementById("questions");
 const resultBox = document.getElementById("result");
 
 let answers = {};
+let currentDay = 1;
 
-function goToScreen(id) {
+function goTo(n) {
   screens.forEach(s => s.classList.remove("active"));
-  document.getElementById(`screen-${id}`)?.classList.add("active") ||
-  document.getElementById(id).classList.add("active");
+  document.getElementById(`screen-${n}`).classList.add("active");
 }
 
-function validateAge() {
-  const age = document.getElementById("age").value;
-  if (age >= 40 && age <= 65) {
-    goToScreen(3);
-  } else {
-    alert("Alat ini dirancang untuk usia 40–65 tahun 🌿");
-  }
-}
-
-function selectJob(el) {
-  document.querySelectorAll(".option-card").forEach(c => c.classList.remove("active"));
+function pick(el){
+  document.querySelectorAll(".option").forEach(o=>o.classList.remove("active"));
   el.classList.add("active");
-  el.querySelector("input").checked = true;
 }
 
-questions.forEach(q => {
-  const div = document.createElement("div");
-  div.innerHTML = `
-    <div class="question-card">
+questions.forEach(q=>{
+  qBox.innerHTML += `
+    <div class="question">
       <strong>${q.text}</strong>
-      <div class="answer-btn" onclick="selectAnswer(this, ${q.id}, '${q.dim}', 1)">Tidak</div>
-      <div class="answer-btn" onclick="selectAnswer(this, ${q.id}, '${q.dim}', 2)">Terkadang</div>
-      <div class="answer-btn" onclick="selectAnswer(this, ${q.id}, '${q.dim}', 3)">Ya</div>
+      <div onclick="answer(${q.id}, '${q.dim}', 3)">Ya</div>
+      <div onclick="answer(${q.id}, '${q.dim}', 2)">Terkadang</div>
+      <div onclick="answer(${q.id}, '${q.dim}', 1)">Tidak</div>
     </div>
   `;
-  questionContainer.appendChild(div);
 });
 
-function selectAnswer(el, id, dim, val) {
-  el.parentElement.querySelectorAll(".answer-btn").forEach(b => b.classList.remove("active"));
-  el.classList.add("active");
-  answers[id] = { dim, val };
+function answer(id, dim, val){
+  answers[id] = {dim, val};
 }
 
-function calculateResult() {
-  let score = {};
+function checkAnswers(){
+  if(Object.keys(answers).length < questions.length){
+    alert("Anda belum menjawab semua pertanyaan.");
+    return;
+  }
 
-  Object.values(answers).forEach(a => {
+  let score = {};
+  Object.values(answers).forEach(a=>{
     score[a.dim] = (score[a.dim] || 0) + a.val;
   });
 
-  const dominant = Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
+  let dominant = Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
 
-  const advice = {
-    Fisik: "Tubuhmu mungkin lelah bukan karena kurang kuat, tapi karena terlalu jarang benar-benar berhenti. Physical rest bisa dimulai dari tidur tanpa distraksi atau berbaring tanpa tujuan.",
-    Mental: "Pikiranmu tampak terus bekerja. Mental rest hadir saat kamu berhenti memproses—tanpa berita, tanpa tuntutan berpikir.",
-    Sensori: "Indramu mungkin kewalahan. Redupkan cahaya, kurangi suara, dan beri ruang hening meski hanya beberapa menit.",
-    Emosional: "Ada emosi yang lama tertahan. Emotional rest dimulai saat kamu boleh jujur tanpa harus terlihat kuat.",
-    Sosial: "Social rest bukan tentang menyendiri, tapi memilih relasi yang tidak menguras.",
-    Kreatif: "Kelelahan kreatif muncul saat hidup terlalu fungsional. Nikmati keindahan tanpa tujuan.",
-    Spiritual: "Spiritual rest hadir saat hidup kembali terasa bermakna—melalui refleksi, doa, atau diam."
+  const reflections = {
+    Physical: "Tubuh Anda tampaknya sudah lama menahan lelah...",
+    Mental: "Pikiran Anda mungkin belum benar-benar mendapat ruang istirahat...",
+    Emotional: "Ada banyak perasaan yang selama ini Anda simpan sendiri...",
+    Sensory: "Indra Anda mungkin telah terlalu lama bekerja tanpa jeda...",
+    Social: "Hubungan sosial Anda mungkin lebih banyak menguras daripada menguatkan...",
+    Creative: "Ketika ide terasa macet, bukan berarti Anda kehilangan kreativitas...",
+    Spiritual: "Ada bagian terdalam dari diri Anda yang mungkin rindu disentuh kembali..."
   };
 
-  resultBox.innerHTML = `
-    <p>
-      Sepertinya bagian <strong>${dominant}</strong> dalam hidupmu sedang membutuhkan perhatian lebih.
-    </p>
-    <p class="soft">${advice[dominant]}</p>
-  `;
+  resultBox.innerHTML = `<p>${reflections[dominant]}</p>`;
+  goTo(5);
+}
 
-  goToScreen(5);
+function openDay(day){
+  if(day !== currentDay) return;
+  document.getElementById("dayTitle").innerText = `Day ${day}`;
+  document.getElementById("dayGuide").innerText =
+    day === 1 ? "Luangkan 10 menit untuk menuliskan apa yang paling memenuhi pikiran Anda hari ini." :
+    day === 2 ? "Perhatikan tubuh Anda hari ini..." :
+    day === 3 ? "Kurangi rangsangan indra..." :
+    day === 4 ? "Renungkan hal yang memberi makna..." :
+    "Nikmati keindahan tanpa tujuan.";
+  goTo("day");
+}
+
+function finishDay(){
+  currentDay++;
+  document.querySelectorAll(".day")[currentDay-1]?.classList.remove("locked");
+  goTo(7);
 }
