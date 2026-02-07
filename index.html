@@ -10,19 +10,22 @@
 
 <div id="app">
 
-<!-- SCREEN 1 -->
+<!-- ================= SCREEN 1 ================= -->
 <section class="screen active" id="screen-1">
   <h1>Restore 40+</h1>
   <p class="soft">
     Halo,<br>
     saya di sini untuk mendengarkan Anda.
   </p>
-  <p>Apakah Anda bersedia mengikuti perjalanan kecil ini bersama saya?</p>
+  <p>
+    Apakah Anda bersedia mengikuti perjalanan kecil ini<br>
+    untuk memahami dan memulihkan diri?
+  </p>
   <button onclick="goTo(2)">Ya, saya bersedia</button>
   <button class="secondary" onclick="goTo('exit')">Tidak sekarang</button>
 </section>
 
-<!-- EXIT -->
+<!-- ================= EXIT ================= -->
 <section class="screen" id="screen-exit">
   <p class="center soft">
     Tidak apa-apa 🌿<br><br>
@@ -32,7 +35,7 @@
   </p>
 </section>
 
-<!-- SCREEN 2 -->
+<!-- ================= SCREEN 2 ================= -->
 <section class="screen" id="screen-2">
   <h2>Mari berkenalan</h2>
   <input id="name" placeholder="Nama Anda">
@@ -40,7 +43,7 @@
   <button onclick="goTo(3)">Lanjut</button>
 </section>
 
-<!-- SCREEN 3 -->
+<!-- ================= SCREEN 3 ================= -->
 <section class="screen" id="screen-3">
   <h2>Saat ini, apa peran utama Anda?</h2>
 
@@ -56,4 +59,120 @@
   <div class="option" onclick="pick(this)">
     <input type="radio" name="job"> Ibu Rumah Tangga
   </div>
+  <div class="option" onclick="pick(this)">
+    <input type="radio" name="job"> Caregiver keluarga
+  </div>
+  <div class="option" onclick="pick(this)">
+    <input type="radio" name="job"> Lainnya
+  </div>
+
+  <button onclick="goTo(4)">Mulai</button>
+</section>
+
+<!-- ================= QUESTIONS ================= -->
+<section class="screen" id="screen-4">
+  <h2>Jawablah dengan jujur</h2>
+  <p class="soft">
+    Tidak ada jawaban benar atau salah.<br>
+    Jawablah sesuai dengan kondisi Anda saat ini.
+  </p>
+
+  <div id="questions"></div>
+
+  <button onclick="checkAnswers()">Lihat Refleksi</button>
+</section>
+
+<!-- ================= RESULT ================= -->
+<section class="screen" id="screen-5">
+  <h2>Refleksi Anda</h2>
+
+  <div id="result"></div>
+
+  <p class="soft">
+    Refleksi ini bukan penilaian,<br>
+    melainkan undangan untuk lebih memperhatikan diri Anda.
+  </p>
+
+  <button onclick="goTo(6)">Lanjutkan</button>
+</section>
+
+<!-- ================= JOIN ================= -->
+<section class="screen" id="screen-6">
+  <h2>Kini, kita bisa berjalan bersama 🌱</h2>
+
+  <p>
+    Restore 40+ bukan dibuat untuk memperbaiki Anda,<br>
+    melainkan menemani Anda pulih dengan ritme yang manusiawi.
+  </p>
+
+  <p class="soft">
+    Jika Anda ingin melanjutkan perjalanan ini bersama kami,<br>
+    silakan tinggalkan nomor yang bisa kami hubungi.
+  </p>
+
+  <input placeholder="Nomor HP Anda">
+  <button onclick="goTo(7)">Mulai Pemulihan</button>
+</section>
+
+<!-- ================= DAY OVERVIEW ================= -->
+<section class="screen" id="screen-7">
+  <h2>Mari kita mulai proses pemulihan Anda</h2>
+
+  <p class="soft">
+    Lima hari pertama ini dirancang sederhana,<br>
+    agar Anda bisa berjalan pelan tanpa tekanan.
+  </p>
+
+  <div class="day active" onclick="openDay(1)">Day 1 · Menenangkan Pikiran</div>
+  <div class="day locked">Day 2 · Merawat Tubuh</div>
+  <div class="day locked">Day 3 · Mengistirahatkan Indra</div>
+  <div class="day locked">Day 4 · Menyentuh Makna</div>
+  <div class="day locked">Day 5 · Menghidupkan Kreativitas</div>
+</section>
+
+<!-- ================= DAY DETAIL ================= -->
+<section class="screen" id="screen-day">
+  <h2 id="dayTitle"></h2>
+
+  <p id="dayIntro" class="soft"></p>
+
+  <ul id="journalPrompts"></ul>
+
+  <textarea
+    id="journalText"
+    rows="6"
+    placeholder="Tuliskan refleksi Anda di sini..."></textarea>
+
+  <button onclick="submitJournal()">Submit</button>
+</section>
+
+<!-- ================= FINAL & PACKAGES ================= -->
+<section class="screen" id="screen-final">
+  <h2>Terima kasih telah berjalan sejauh ini 🌿</h2>
+
+  <p>
+    Lima hari ini mungkin tidak menghapus semua lelah,<br>
+    tetapi Anda telah memberi ruang bagi diri sendiri.
+  </p>
+
+  <p class="soft">
+    Berdasarkan perjalanan dan refleksi Anda,<br>
+    berikut pilihan lanjutan yang mungkin relevan:
+  </p>
+
   <div id="packages"></div>
+
+  <p class="soft">
+    Tidak perlu memutuskan sekarang.<br>
+    Dengarkan kembali kebutuhan Anda.
+  </p>
+</section>
+
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="data/questions.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
