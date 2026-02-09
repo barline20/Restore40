@@ -21,9 +21,17 @@ NAVIGASI LAYAR
 ====================================================== */
 function goTo(id) {
   screens.forEach(s => s.classList.remove("active"));
+
   const target = document.getElementById(`screen-${id}`);
-  if (target) target.classList.add("active");
+  if (!target) {
+    console.error("Screen tidak ditemukan:", id);
+    return;
+  }
+
+  target.classList.add("active");
+  window.scrollTo(0, 0); // optional, tapi enak
 }
+
 
 /* ======================================================
 SCREEN 3 – PILIH PERAN
