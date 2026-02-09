@@ -1,153 +1,164 @@
+/* ======================================================
+QUESTIONS DATA – RESTORE 40+
+Urutan jawaban:
+3 = Ya
+2 = Terkadang
+1 = Tidak
+====================================================== */
+
 const questions = [
 
-  /* ===============================
-     A. BADAN CAPEK (PHYSICAL REST)
-  ================================ */
+/* ======================
+A. LELAH FISIK
+====================== */
+{
+  id: 1,
+  text: "Pilihan antara tidur atau mengerjakan satu tugas lagi, saya lebih memilih tidur.",
+  category: "Fisik"
+},
+{
+  id: 2,
+  text: "Badan seringkali capek, tapi sulit bisa langsung tidur nyenyak.",
+  category: "Fisik"
+},
+{
+  id: 3,
+  text: "Jam tidur saya sering kurang dari yang ideal.",
+  category: "Fisik"
+},
 
-  {
-    id: 1,
-    dim: "Fisik",
-    text: "Dalam pilihan antara tidur atau mengerjakan satu tugas lagi, saya lebih memilih mengerjakan tugas tersebut."
-  },
-  {
-    id: 2,
-    dim: "Fisik",
-    text: "Tubuh saya sering terasa lelah, tetapi sulit untuk benar-benar beristirahat dengan nyenyak."
-  },
-  {
-    id: 3,
-    dim: "Fisik",
-    text: "Jam tidur saya sering kali kurang dari yang saya butuhkan."
-  },
+/* ======================
+B. LELAH PIKIRAN (MENTAL)
+====================== */
+{
+  id: 4,
+  text: "Masalah kecil seringkali membuat gampang emosi.",
+  category: "Mental"
+},
+{
+  id: 5,
+  text: "Saya lebih sering membayangkan hidup ideal daripada menghadapi kenyataan hidup yang ada.",
+  category: "Mental"
+},
+{
+  id: 6,
+  text: "Waktunya tidur, tapi pikiran masih jalan terus.",
+  category: "Mental"
+},
 
-  /* ===============================
-     B. PIKIRAN CAPEK (MENTAL REST)
-  ================================ */
+/* ======================
+C. LELAH EMOSIONAL
+====================== */
+{
+  id: 7,
+  text: "Lebih sering mengingat kegagalan daripada keberhasilan.",
+  category: "Emosional"
+},
+{
+  id: 8,
+  text: "Memikirkan arah hidup membuat hati berat.",
+  category: "Emosional"
+},
+{
+  id: 9,
+  text: "Saya cenderung melihat sisi berat kehidupan.",
+  category: "Emosional"
+},
 
-  {
-    id: 4,
-    dim: "Mental",
-    text: "Hal kecil sering membuat saya mudah merasa kesal atau tertekan."
-  },
-  {
-    id: 5,
-    dim: "Mental",
-    text: "Saya lebih sering membayangkan hidup yang ideal daripada menghadapi kenyataan hidup saya saat ini."
-  },
-  {
-    id: 6,
-    dim: "Mental",
-    text: "Ketika waktu tidur tiba, pikiran saya masih terus berjalan."
-  },
+/* ======================
+D. LELAH SPIRITUAL
+====================== */
+{
+  id: 10,
+  text: "Saya merasa harus tampil baik-baik saja di depan orang.",
+  category: "Spiritual"
+},
+{
+  id: 11,
+  text: "Saya lebih memilih menghindari acara kebersamaan.",
+  category: "Spiritual"
+},
+{
+  id: 12,
+  text: "Jika sedang memerlukan bantuan, saya bingung harus hubungi siapa.",
+  category: "Spiritual"
+},
 
-  /* ===============================
-     C. HATI CAPEK (EMOTIONAL REST)
-  ================================ */
+/* ======================
+E. LELAH SENSORIK
+====================== */
+{
+  id: 13,
+  text: "Suara berisik membuat saya tidak nyaman.",
+  category: "Sensorik"
+},
+{
+  id: 14,
+  text: "Saya menatap layar monitor secara rutin setiap hari.",
+  category: "Sensorik"
+},
+{
+  id: 15,
+  text: "Saya kurang peka dengan bau di sekitar.",
+  category: "Sensorik"
+},
+{
+  id: 16,
+  text: "Saya lebih memilih makanan instan atau minuman manis.",
+  category: "Sensorik"
+},
+{
+  id: 17,
+  text: "Sentuhan fisik membuat saya tidak nyaman.",
+  category: "Sensorik"
+},
 
-  {
-    id: 7,
-    dim: "Emosional",
-    text: "Saya lebih sering mengingat kegagalan dibandingkan keberhasilan dalam hidup saya."
-  },
-  {
-    id: 8,
-    dim: "Emosional",
-    text: "Memikirkan arah hidup ke depan membuat hati saya terasa berat."
-  },
-  {
-    id: 9,
-    dim: "Emosional",
-    text: "Saya cenderung melihat sisi berat atau melelahkan dari kehidupan."
-  },
+/* ======================
+F. LELAH SOSIAL / RELASI
+====================== */
+{
+  id: 18,
+  text: "Saya lebih mendahulukan orang lain daripada kepentingan saya sendiri.",
+  category: "Relasi"
+},
+{
+  id: 19,
+  text: "Ketika menyediakan waktu untuk diri sendiri, saya sering merasa bersalah.",
+  category: "Relasi"
+},
+{
+  id: 20,
+  text: "Saya merasa usaha yang saya lakukan sering kurang dihargai orang lain.",
+  category: "Relasi"
+},
 
-  /* ===============================
-     D. RELASI & MAKNA (SOCIAL & SPIRITUAL REST)
-  ================================ */
+/* ======================
+G. LELAH EKSPRESIF
+====================== */
+{
+  id: 21,
+  text: "Mendapatkan ide baru sulit menurut saya.",
+  category: "Ekspresif"
+},
+{
+  id: 22,
+  text: "Saya tidak merasa kreatif.",
+  category: "Ekspresif"
+},
+{
+  id: 23,
+  text: "Saya sedang membutuhkan semangat dan inspirasi.",
+  category: "Ekspresif"
+}
 
-  {
-    id: 10,
-    dim: "Relasi",
-    text: "Saya merasa perlu selalu terlihat ‘baik-baik saja’ di hadapan orang lain."
-  },
-  {
-    id: 11,
-    dim: "Relasi",
-    text: "Saya lebih memilih menghindari acara atau pertemuan bersama banyak orang."
-  },
-  {
-    id: 12,
-    dim: "Spiritual",
-    text: "Ketika membutuhkan dukungan, saya sering bingung harus menghubungi siapa."
-  },
+];
 
-  /* ===============================
-     E. INDRA CAPEK (SENSORY REST)
-  ================================ */
-
-  {
-    id: 13,
-    dim: "Sensorik",
-    text: "Suara yang bising atau terlalu ramai membuat saya cepat merasa tidak nyaman."
-  },
-  {
-    id: 14,
-    dim: "Sensorik",
-    text: "Sebagian besar waktu saya dihabiskan di depan layar."
-  },
-  {
-    id: 15,
-    dim: "Sensorik",
-    text: "Saya jarang benar-benar memperhatikan aroma atau suasana di sekitar saya."
-  },
-  {
-    id: 16,
-    dim: "Sensorik",
-    text: "Saya lebih sering memilih makanan instan atau minuman manis."
-  },
-  {
-    id: 17,
-    dim: "Sensorik",
-    text: "Sentuhan fisik (seperti pelukan atau genggaman tangan) membuat saya kurang nyaman."
-  },
-
-  /* ===============================
-     F. PERAN HIDUP (EMOTIONAL REST)
-  ================================ */
-
-  {
-    id: 18,
-    dim: "Emosional",
-    text: "Saya lebih sering mendahulukan kebutuhan orang lain dibandingkan kebutuhan diri saya sendiri."
-  },
-  {
-    id: 19,
-    dim: "Emosional",
-    text: "Ketika meluangkan waktu untuk diri sendiri, saya sering merasa bersalah."
-  },
-  {
-    id: 20,
-    dim: "Emosional",
-    text: "Saya merasa usaha yang saya lakukan sering kali kurang dihargai."
-  },
-
-  /* ===============================
-     G. CAPEK EKSPRESIF
-  ================================ */
-
-  {
-    id: 21,
-    dim: "Ekspresif",
-    text: "Mendapatkan ide baru terasa sulit bagi saya akhir-akhir ini."
-  },
-  {
-    id: 22,
-    dim: "Ekspresif",
-    text: "Saya merasa diri saya tidak lagi kreatif."
-  },
-  {
-    id: 23,
-    dim: "Ekspresif",
-    text: "Saat ini, saya sangat membutuhkan semangat dan inspirasi baru."
-  }
-
+/* ======================================================
+OPTIONS (GLOBAL)
+Dipakai saat render pertanyaan
+====================================================== */
+const answerOptions = [
+  { label: "Ya", value: 3 },
+  { label: "Terkadang", value: 2 },
+  { label: "Tidak", value: 1 }
 ];
