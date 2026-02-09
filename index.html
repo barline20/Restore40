@@ -1,139 +1,190 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restore 40+</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-</head>
 
+  <!-- STYLE NANTI DI FILE style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
+
 <div id="app">
 
-  <!-- SCREEN 1 : OPENING -->
-  <section class="screen active" id="screen-1">
-    <h1>🌿 Restore 40+</h1>
-    <p class="soft">
-      Hai,<br />
-      Saya di sini untuk mendengarkan Anda 🤍
-    </p>
-    <p>
-      Apakah Anda bersedia memulai perjalanan kecil ini<br />
-      untuk memahami dan memulihkan diri?
-    </p>
-    <button onclick="goTo(2)">Ya, saya bersedia</button>
-    <button class="secondary" onclick="goTo('exit')">Tidak sekarang</button>
-  </section>
+<!-- =====================================================
+SCREEN 1 – PERSETUJUAN
+===================================================== -->
+<section class="screen active" id="screen-1">
+  <h1>🌿 Restore 40+</h1>
+  <p class="soft">
+    Apakah Anda bersedia meluangkan waktu sejenak<br>
+    untuk merefleksi dan memulihkan diri?
+  </p>
 
-  <!-- SCREEN EXIT -->
-  <section class="screen" id="screen-exit">
-    <p class="soft center">
-      Tidak apa-apa 🌱<br /><br />
-      Kadang, mengetahui bahwa ada ruang untuk beristirahat saja sudah cukup.<br />
-      Jika suatu hari Anda ingin kembali,<br />
-      <strong>Restore 40+</strong> akan tetap ada.
-    </p>
-  </section>
+  <button class="primary" onclick="goTo(2)">
+    Ya, saya bersedia
+  </button>
 
-  <!-- SCREEN 2 : NAMA & USIA -->
-  <section class="screen" id="screen-2">
-    <h2>🤍 Mari berkenalan</h2>
-    <input id="name" type="text" placeholder="Nama Anda" />
-    <input
-      id="age"
-      type="number"
-      placeholder="Usia Anda (dirancang untuk usia 40–59 tahun)"
-    />
-    <div class="nav">
-      <button onclick="goTo(3)">Lanjut</button>
-    </div>
-  </section>
+  <button class="ghost" onclick="showLaterMessage()">
+    Tidak sekarang
+  </button>
 
-  <!-- SCREEN 3 : PERAN -->
-  <section class="screen" id="screen-3">
-    <h2>🌱 Saat ini, apa peran utama Anda?</h2>
+  <p id="laterMessage" class="soft hidden">
+    Tidak apa-apa 🌱 Kadang, mengetahui bahwa ada ruang untuk beristirahat saja sudah cukup.
+    Jika suatu hari Anda ingin kembali, <strong>Restore 40+</strong> akan tetap ada.
+  </p>
+</section>
 
-    <div class="option" onclick="pick(this)">Karyawan / Pegawai</div>
-    <div class="option" onclick="pick(this)">Pimpinan / Manajer</div>
-    <div class="option" onclick="pick(this)">Wirausaha</div>
-    <div class="option" onclick="pick(this)">Ibu Rumah Tangga</div>
-    <div class="option" onclick="pick(this)">Caregiver keluarga</div>
-    <div class="option" onclick="pick(this)">Lainnya</div>
+<!-- =====================================================
+SCREEN 2 – NAMA & USIA
+===================================================== -->
+<section class="screen" id="screen-2">
+  <h2>🤍 Mari berkenalan</h2>
 
-    <input
-      id="customJob"
-      type="text"
-      placeholder="Tuliskan peran Anda"
-      style="display:none"
-      oninput="saveCustomJob(this.value)"
-    />
+  <input
+    id="userName"
+    type="text"
+    placeholder="Nama Anda"
+  />
 
-    <div class="nav">
-      <button onclick="goTo(4)">Mulai</button>
-    </div>
-  </section>
+  <input
+    id="userAge"
+    type="number"
+    placeholder="Usia Anda (dirancang untuk usia 40–59 tahun)"
+  />
 
-  <!-- SCREEN 4 : PERTANYAAN -->
-  <section class="screen" id="screen-4">
-    <h2>🌿 Luangkan sejenak untuk menjawab</h2>
-    <p class="soft">
-      Tidak ada jawaban benar atau salah.<br />
-      Kami menghargai setiap kejujuran yang Anda bagikan.
-    </p>
-    <div id="questions"></div>
-    <button onclick="checkAnswers()">Lihat Refleksi</button>
-  </section>
+  <button class="primary" onclick="validateProfile()">
+    Lanjut
+  </button>
+</section>
 
-  <!-- SCREEN 5 : HASIL -->
-  <section class="screen" id="screen-5">
-    <h2>✨ Refleksi Anda</h2>
-    <div id="result"></div>
-    <button onclick="goTo(6)">Lanjutkan</button>
-  </section>
+<!-- =====================================================
+SCREEN 3 – PERAN
+===================================================== -->
+<section class="screen" id="screen-3">
+  <h2>🌱 Saat ini, apa peran utama Anda?</h2>
 
-  <!-- SCREEN 6 : TRANSISI -->
-  <section class="screen" id="screen-6">
-    <h2>🤍 Kini, kita bisa berjalan bersama</h2>
-    <p class="soft">
-      Restore 40+ hadir untuk menemani Anda beristirahat,<br />
-      merefleksi, dan kembali utuh.
-    </p>
-    <input placeholder="Nomor HP Anda" />
-    <button onclick="goTo(7)">Mulai Perjalanan</button>
-  </section>
+  <div class="option" onclick="selectRole(this)">Karyawan / Pegawai</div>
+  <div class="option" onclick="selectRole(this)">Pimpinan / Manajer</div>
+  <div class="option" onclick="selectRole(this)">Wirausaha</div>
+  <div class="option" onclick="selectRole(this)">Ibu Rumah Tangga</div>
+  <div class="option" onclick="selectRole(this)">Caregiver keluarga</div>
+  <div class="option" onclick="selectRole(this)">Lainnya</div>
 
-  <!-- SCREEN 7 : DAFTAR HARI -->
-  <section class="screen" id="screen-7">
-    <h2>🌿 Mari kita mulai proses pemulihan Anda</h2>
-    <div class="day active" onclick="openDay(1)">Hari 1</div>
-    <div class="day locked" onclick="openDay(2)">Hari 2</div>
-    <div class="day locked" onclick="openDay(3)">Hari 3</div>
-    <div class="day locked" onclick="openDay(4)">Hari 4</div>
-    <div class="day locked" onclick="openDay(5)">Hari 5</div>
-  </section>
+  <input
+    id="customRole"
+    type="text"
+    class="hidden"
+    placeholder="Tuliskan peran Anda"
+  />
 
-  <!-- SCREEN DAY DETAIL -->
-  <section class="screen" id="screen-day">
-    <h2 id="dayTitle"></h2>
-    <p id="dayIntro" class="soft"></p>
-    <ul id="dayGuidance"></ul>
-    <button onclick="nextDay()">Lanjutkan</button>
-  </section>
+  <button class="primary" onclick="validateRole()">
+    Mulai
+  </button>
+</section>
 
-  <!-- SCREEN FINAL -->
-  <section class="screen" id="screen-final">
-    <h2>🌱 Terima kasih telah berjalan sejauh ini</h2>
-    <p class="soft">
-      Anda telah menyelesaikan perjalanan 5 hari<br />
-      dengan ritme Anda sendiri.
-    </p>
-    <div id="packages"></div>
-  </section>
+<!-- =====================================================
+SCREEN 4 – PERTANYAAN
+===================================================== -->
+<section class="screen" id="screen-4">
+  <h2>🌿 Luangkan sejenak untuk menjawab</h2>
+
+  <p class="soft">
+    Luangkan sejenak untuk menjawab sesuai dengan apa yang Anda rasakan saat ini.<br>
+    Tidak ada jawaban benar atau salah. Kami menghargai setiap kejujuran yang dibagikan.
+  </p>
+
+  <!-- PERTANYAAN DI-RENDER VIA questions.js -->
+  <div id="questionContainer"></div>
+
+  <button class="primary" onclick="submitAnswers()">
+    Lihat Refleksi
+  </button>
+</section>
+
+<!-- =====================================================
+SCREEN 5 – HASIL REFLEKSI
+===================================================== -->
+<section class="screen" id="screen-5">
+  <h2>Hasil Refleksi Anda</h2>
+
+  <!-- TEKS REFLEKSI SESUAI DOMINANT KELELAHAN -->
+  <div id="reflectionResult"></div>
+
+  <button class="primary" onclick="goTo(6)">
+    Lanjut
+  </button>
+</section>
+
+<!-- =====================================================
+SCREEN 6 – AJAKAN BERJALAN BERSAMA
+===================================================== -->
+<section class="screen" id="screen-6">
+  <h2>🤍 Kini, kita bisa berjalan bersama</h2>
+
+  <p class="soft">
+    Restore 40+ hadir untuk berjalan bersama Anda,<br>
+    memberi ruang aman untuk beristirahat, merefleksi, dan kembali utuh.
+  </p>
+
+  <input
+    type="tel"
+    placeholder="Nomor HP Anda"
+  />
+
+  <button class="primary" onclick="goTo(7)">
+    Mulai Perjalanan
+  </button>
+</section>
+
+<!-- =====================================================
+SCREEN 7 – PROGRAM 5 HARI (LOCK / UNLOCK)
+===================================================== -->
+<section class="screen" id="screen-7">
+  <h2>🌿 Mari kita mulai proses pemulihan Anda</h2>
+
+  <p class="soft">
+    Setiap langkah boleh dijalani dengan ritme Anda sendiri.
+  </p>
+
+  <!-- DAY 1 -->
+  <div class="day unlocked" id="day-1">
+    <h3>Hari 1</h3>
+    <p class="day-content"></p>
+    <button onclick="completeDay(1)">Selesai Hari 1</button>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day locked" id="day-2">
+    <h3>Hari 2</h3>
+    <p class="day-content"></p>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day locked" id="day-3">
+    <h3>Hari 3</h3>
+    <p class="day-content"></p>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day locked" id="day-4">
+    <h3>Hari 4</h3>
+    <p class="day-content"></p>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day locked" id="day-5">
+    <h3>Hari 5</h3>
+    <p class="day-content"></p>
+  </div>
+
+</section>
 
 </div>
 
-<!-- SCRIPT -->
-<script src="data/questions.js"></script>
+<!-- SCRIPT NANTI DIPISAH -->
+<script src="questions.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
