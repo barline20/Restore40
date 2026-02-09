@@ -78,29 +78,25 @@ function validateRole() {
 SCREEN 4 – RENDER QUESTIONS
 ====================================================== */
 function renderQuestions() {
-  const container = document.getElementById("questionContainer");
-  container.innerHTML = "";
+  const box = document.getElementById("questions");
+  box.innerHTML = "";
 
-  questions.forEach(q => {
-    const qDiv = document.createElement("div");
-    qDiv.className = "question";
+  questions.forEach((q, index) => {
+    const qEl = document.createElement("div");
+    qEl.className = "question";
 
-    qDiv.innerHTML = `
-      <p><strong>${q.id}.</strong> ${q.text}</p>
-      <div class="options">
-        ${answerOptions.map(opt => `
-          <div class="option"
-               onclick="selectAnswer(${q.id}, '${q.category}', ${opt.value}, this)">
-            ${opt.label}
-          </div>
-        `).join("")}
-      </div>
+    qEl.innerHTML = `
+      <p><strong>${index + 1}.</strong> ${q.text}</p>
+
+      <div class="option" onclick="selectAnswer(${index}, 3, this)">Ya</div>
+      <div class="option" onclick="selectAnswer(${index}, 2, this)">Terkadang</div>
+      <div class="option" onclick="selectAnswer(${index}, 1, this)">Tidak</div>
     `;
 
-    container.appendChild(qDiv);
+    box.appendChild(qEl);
   });
 }
-
+let answers = {};
 function selectAnswer(id, category, value, el) {
   answers[id] = { value, category };
 
