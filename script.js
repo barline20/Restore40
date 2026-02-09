@@ -62,7 +62,11 @@ function answer(id, dim, val, el) {
 HITUNG SKOR & TENTUKAN ISTIRAHAT DOMINAN
 ====================================================== */
 function checkAnswers() {
-  const unanswered = questions.filter(q => !answers[q.id]);
+  function checkAnswers() {
+  const unanswered = questions.filter(
+    q => !answers[String(q.id)]
+  );
+
   if (unanswered.length > 0) {
     alert("🌿 Masih ada pernyataan yang belum dijawab.");
     return;
@@ -75,12 +79,11 @@ function checkAnswers() {
 
   dominantRests = Object.keys(scores)
     .sort((a, b) => scores[b] - scores[a])
-    .slice(0, 2);
+    .slice(0, 1);
 
   setActiveDayContent();
   renderResult();
-  renderDayList();
-  goTo(5);
+  goTo(4); // ⬅️ screen HASIL REFLEKSI
 }
 
 /* ======================================================
