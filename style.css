@@ -1,35 +1,235 @@
+/* =========================
+   GLOBAL
+========================= */
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f7f3;
+  color: #2f3e46;
+  margin: 0;
+}
+
+#app {
+  padding: 20px;
+}
+
+/* =========================
+   SCREEN LAYOUT
+========================= */
+
+.screen {
+  display: none;
+  max-width: 600px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1, h2 {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+.soft {
+  color: #555;
+}
+
+.center {
+  text-align: center;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
 button {
   background: #588157;
   color: white;
-  padding: 12px;
+  padding: 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 100%;
-  margin-top: 12px;
+  margin-top: 14px;
+  font-size: 16px;
   cursor: pointer;
 
-  /* animasi halus */
   transition: 
     background-color 0.2s ease,
     transform 0.15s ease,
     box-shadow 0.15s ease;
 }
 
-/* saat hover (mouse di atas) */
+/* hover */
 button:hover {
   background: #4a6f4a;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* saat ditekan */
+/* active / pressed */
 button:active {
-  background: #3f5f3f; /* hijau lebih gelap */
-  transform: scale(0.97); /* efek ditekan */
+  background: #3f5f3f;
+  transform: scale(0.97);
   box-shadow: 0 2px 4px rgba(0,0,0,0.15) inset;
 }
 
-/* fokus keyboard / accessibility */
+/* focus */
 button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(88,129,87,0.3);
+}
+
+/* secondary button */
+button.secondary {
+  background: transparent;
+  color: #555;
+  border: 1px solid #cbd5c0;
+}
+
+button.secondary:hover {
+  background: #eef3ef;
+}
+
+/* =========================
+   INPUT
+========================= */
+
+input {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: 1px solid #cbd5c0;
+  font-size: 16px;
+  background: #ffffff;
+}
+
+/* focus input */
+input:focus {
+  outline: none;
+  border-color: #588157;
+  box-shadow: 0 0 0 3px rgba(88,129,87,0.2);
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav {
+  margin-top: 24px;
+}
+
+/* =========================
+   OPTION (PERAN)
+========================= */
+
+.option {
+  border: 1px solid #cbd5c0;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.option:hover {
+  background: #f0f7f2;
+}
+
+.option.active {
+  background: #e9f5ec;
+  border-color: #588157;
+}
+
+/* =========================
+   QUESTION CARD
+========================= */
+
+.question-card {
+  border: 1px solid #cbd5c0;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 14px 0;
+}
+
+.answer-btn {
+  border: 1px solid #cbd5c0;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.answer-btn:hover {
+  background: #f0f7f2;
+}
+
+.answer-btn.active {
+  background: #e9f5ec;
+  border-color: #588157;
+}
+
+/* =========================
+   DAY LIST (SCREEN 7)
+========================= */
+
+.day {
+  border: 1px solid #cbd5c0;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.day.active {
+  background: #e9f5ec;
+  border-color: #588157;
+}
+
+.day.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* =========================
+   DAY DETAIL
+========================= */
+
+#dayGuidance {
+  margin: 20px 0;
+  padding-left: 18px;
+}
+
+#dayGuidance li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* =========================
+   PACKAGE
+========================= */
+
+.package {
+  border: 1px solid #cbd5c0;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.package.recommended {
+  border-color: #588157;
+  background: #f0f7f2;
 }
