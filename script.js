@@ -20,7 +20,7 @@ let activeDayContent = null;
 NAVIGASI LAYAR
 ====================================================== */
 function goTo(id) {
-  screens.forEach(s => s.classList.remove("active"));
+  s.forEach(s => s.classList.remove("active"));
 
   const target = document.getElementById(`screen-${id}`);
   if (!target) {
@@ -102,8 +102,9 @@ function checkAnswers() {
     .slice(0, 2);
 
   renderResult();
-  setActiveDayContent();
+  setActiveDayContent(dominantRests[0]);
   goTo(5);
+
 }
 
 /* ======================================================
