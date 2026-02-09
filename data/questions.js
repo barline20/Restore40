@@ -66,12 +66,12 @@ const questions = [
 
   {
     id: 10,
-    dim: "Sosial",
+    dim: "Relasi",
     text: "Saya merasa perlu selalu terlihat ‘baik-baik saja’ di hadapan orang lain."
   },
   {
     id: 11,
-    dim: "Sosial",
+    dim: "Relasi",
     text: "Saya lebih memilih menghindari acara atau pertemuan bersama banyak orang."
   },
   {
@@ -86,27 +86,27 @@ const questions = [
 
   {
     id: 13,
-    dim: "Sensori",
+    dim: "Sensorik",
     text: "Suara yang bising atau terlalu ramai membuat saya cepat merasa tidak nyaman."
   },
   {
     id: 14,
-    dim: "Sensori",
+    dim: "Sensorik",
     text: "Sebagian besar waktu saya dihabiskan di depan layar."
   },
   {
     id: 15,
-    dim: "Sensori",
+    dim: "Sensorik",
     text: "Saya jarang benar-benar memperhatikan aroma atau suasana di sekitar saya."
   },
   {
     id: 16,
-    dim: "Sensori",
+    dim: "Sensorik",
     text: "Saya lebih sering memilih makanan instan atau minuman manis."
   },
   {
     id: 17,
-    dim: "Sensori",
+    dim: "Sensorik",
     text: "Sentuhan fisik (seperti pelukan atau genggaman tangan) membuat saya kurang nyaman."
   },
 
@@ -131,22 +131,22 @@ const questions = [
   },
 
   /* ===============================
-     G. CAPEK KREATIF (CREATIVE REST)
+     G. CAPEK EKSPRESIF
   ================================ */
 
   {
     id: 21,
-    dim: "Kreatif",
+    dim: "Ekspresif",
     text: "Mendapatkan ide baru terasa sulit bagi saya akhir-akhir ini."
   },
   {
     id: 22,
-    dim: "Kreatif",
+    dim: "Ekspresif",
     text: "Saya merasa diri saya tidak lagi kreatif."
   },
   {
     id: 23,
-    dim: "Kreatif",
+    dim: "Ekspresif",
     text: "Saat ini, saya sangat membutuhkan semangat dan inspirasi baru."
   }
 
