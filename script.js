@@ -20,7 +20,7 @@ let activeDayContent = null;
 NAVIGASI LAYAR
 ====================================================== */
 function goTo(id) {
-  s.forEach(s => s.classList.remove("active"));
+  screens.forEach(s => s.classList.remove("active"));
 
   const target = document.getElementById(`screen-${id}`);
   if (!target) {
@@ -29,9 +29,8 @@ function goTo(id) {
   }
 
   target.classList.add("active");
-  window.scrollTo(0, 0); // optional, tapi enak
+  window.scrollTo(0, 0);
 }
-
 
 /* ======================================================
 SCREEN 3 – PILIH PERAN
@@ -101,7 +100,7 @@ function checkAnswers() {
     .slice(0, 2);
 
   renderResult();
-  setActiveDayContent(dominantRests[0]);
+  setActiveDayContent();
   goTo(5);
 
 }
@@ -125,7 +124,7 @@ function setActiveDayContent() {
     case "Relasi":
       activeDayContent = dayContentRelational;
       break;
-    case "Kreatif":
+    case "Ekspresif":
       activeDayContent = dayContentExpressive;
       break;
     default:
@@ -163,7 +162,7 @@ function renderResult() {
       <br><br>
       <strong>Hari ini</strong>, izinkan diri sendiri hadir.
     `,
-    Kreatif: `
+    Ekspresif: `
       ✨ Bagian diri yang menikmati hal sederhana masih ada.
       <br><br>
       <strong>Lakukan satu hal kecil</strong> tanpa target.
@@ -240,7 +239,7 @@ function renderPackages() {
     Relasi: "Bertumbuh",
     Spiritual: "Bertumbuh",
     Fisik: "Menyeluruh",
-    Kreatif: "Menyeluruh"
+    Ekspresif: "Menyeluruh"
   };
 
   const recommended = map[dominantRests[0]];
