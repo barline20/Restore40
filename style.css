@@ -1,235 +1,260 @@
-/* =========================
-   GLOBAL
-========================= */
+/* ======================================================
+ROOT & RESET
+====================================================== */
+:root {
+  --green: #5f7f63;
+  --green-dark: #3f5f4a;
+  --green-soft: #e6efe8;
+  --bg: #f4f7f2;
+  --text: #2e3a2f;
+  --soft: #5f6f63;
+  --border: #d6e0d8;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f4f7f3;
-  color: #2f3e46;
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
 }
 
+/* ======================================================
+LAYOUT
+====================================================== */
 #app {
-  padding: 20px;
+  max-width: 420px;
+  margin: auto;
+  padding: 24px 20px 40px;
 }
 
-/* =========================
-   SCREEN LAYOUT
-========================= */
-
+/* ======================================================
+SCREEN TRANSITION
+====================================================== */
 .screen {
   display: none;
-  max-width: 600px;
-  margin: auto;
-  padding: 40px 20px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 .screen.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* =========================
-   TYPOGRAPHY
-========================= */
-
-h1, h2 {
-  font-weight: 600;
-  margin-bottom: 16px;
+/* ======================================================
+TYPOGRAPHY
+====================================================== */
+h1,
+h2,
+h3 {
+  text-align: center;
+  line-height: 1.4;
 }
 
-p {
-  line-height: 1.6;
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
 }
 
 .soft {
-  color: #555;
-}
-
-.center {
+  font-size: 14px;
+  color: var(--soft);
   text-align: center;
-}
-
-/* =========================
-   BUTTON
-========================= */
-
-button {
-  background: #588157;
-  color: white;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  width: 100%;
-  margin-top: 14px;
-  font-size: 16px;
-  cursor: pointer;
-
-  transition: 
-    background-color 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-/* hover */
-button:hover {
-  background: #4a6f4a;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-/* active / pressed */
-button:active {
-  background: #3f5f3f;
-  transform: scale(0.97);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15) inset;
-}
-
-/* focus */
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(88,129,87,0.3);
-}
-
-/* secondary button */
-button.secondary {
-  background: transparent;
-  color: #555;
-  border: 1px solid #cbd5c0;
-}
-
-button.secondary:hover {
-  background: #eef3ef;
-}
-
-/* =========================
-   INPUT
-========================= */
-
-input {
-  display: block;
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border-radius: 12px;
-  border: 1px solid #cbd5c0;
-  font-size: 16px;
-  background: #ffffff;
-}
-
-/* focus input */
-input:focus {
-  outline: none;
-  border-color: #588157;
-  box-shadow: 0 0 0 3px rgba(88,129,87,0.2);
-}
-
-/* =========================
-   NAV
-========================= */
-
-.nav {
-  margin-top: 24px;
-}
-
-/* =========================
-   OPTION (PERAN)
-========================= */
-
-.option {
-  border: 1px solid #cbd5c0;
-  border-radius: 12px;
-  padding: 14px;
-  margin: 10px 0;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.option:hover {
-  background: #f0f7f2;
-}
-
-.option.active {
-  background: #e9f5ec;
-  border-color: #588157;
-}
-
-/* =========================
-   QUESTION CARD
-========================= */
-
-.question-card {
-  border: 1px solid #cbd5c0;
-  border-radius: 12px;
-  padding: 16px;
-  margin: 14px 0;
-}
-
-.answer-btn {
-  border: 1px solid #cbd5c0;
-  border-radius: 10px;
-  padding: 12px;
-  margin-top: 8px;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.answer-btn:hover {
-  background: #f0f7f2;
-}
-
-.answer-btn.active {
-  background: #e9f5ec;
-  border-color: #588157;
-}
-
-/* =========================
-   DAY LIST (SCREEN 7)
-========================= */
-
-.day {
-  border: 1px solid #cbd5c0;
-  border-radius: 12px;
-  padding: 14px;
-  margin: 10px 0;
-  cursor: pointer;
-  transition: background 0.2s ease, opacity 0.2s ease;
-}
-
-.day.active {
-  background: #e9f5ec;
-  border-color: #588157;
-}
-
-.day.locked {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-/* =========================
-   DAY DETAIL
-========================= */
-
-#dayGuidance {
-  margin: 20px 0;
-  padding-left: 18px;
-}
-
-#dayGuidance li {
-  margin-bottom: 10px;
   line-height: 1.6;
 }
 
-/* =========================
-   PACKAGE
-========================= */
+/* ======================================================
+FORM
+====================================================== */
+input {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 12px 0;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 15px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--green);
+}
+
+/* ======================================================
+BUTTONS
+====================================================== */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 16px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.primary {
+  background: var(--green);
+  color: #fff;
+}
+
+.primary:hover {
+  background: var(--green-dark);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--green-dark);
+}
+
+/* ======================================================
+OPTIONS (ROLE & ANSWERS)
+====================================================== */
+.option {
+  padding: 14px 16px;
+  margin: 8px 0;
+  border-radius: 14px;
+  background: var(--green-soft);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.option:hover {
+  background: #dbe8df;
+}
+
+.option.active {
+  background: var(--green-dark);
+  color: #fff;
+  transform: scale(0.99);
+}
+
+/* ======================================================
+QUESTION BLOCK
+====================================================== */
+.question {
+  margin-bottom: 20px;
+}
+
+.question p {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+/* ======================================================
+DAY PROGRAM
+====================================================== */
+.day {
+  padding: 18px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  margin: 16px 0;
+  background: #fff;
+  animation: fadeUp 0.4s ease;
+}
+
+.day.unlocked {
+  background: #fff;
+}
+
+.day.locked {
+  opacity: 0.45;
+}
+
+.day.done {
+  background: #edf4ef;
+  border-color: var(--green);
+}
+
+.day p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ======================================================
+CLOSING MESSAGE
+====================================================== */
+.closing {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px dashed var(--border);
+  animation: fadeUp 0.5s ease;
+}
+
+/* ======================================================
+PACKAGES
+====================================================== */
+#packageBox {
+  margin-top: 24px;
+}
 
 .package {
-  border: 1px solid #cbd5c0;
-  border-radius: 14px;
-  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 16px;
   margin: 16px 0;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .package.recommended {
-  border-color: #588157;
-  background: #f0f7f2;
+  border-color: var(--green);
+  background: #eef5f0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.package h3 {
+  margin-top: 0;
+}
+
+.package p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.package del {
+  color: #9aa89f;
+}
+
+/* ======================================================
+UTILITIES
+====================================================== */
+.hidden {
+  display: none;
+}
+
+/* ======================================================
+ANIMATION
+====================================================== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
