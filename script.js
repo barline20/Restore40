@@ -64,7 +64,9 @@ questions.forEach(q => {
 });
 
 function answer(id, dim, val, el) {
-  answers[id] = { dim, val };
+  const key = String(id); // 🔑 NORMALISASI
+
+  answers[key] = { dim, val };
 
   const parent = el.parentElement;
   parent.querySelectorAll(".answer-btn").forEach(b =>
