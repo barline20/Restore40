@@ -10,7 +10,7 @@
 
 <div id="app">
 
-<!-- SCREEN 1 -->
+<!-- SCREEN 1 : OPENING -->
 <section class="screen active" id="screen-1">
   <h1>🌿 Restore 40+</h1>
   <p class="soft">
@@ -35,18 +35,28 @@
   </p>
 </section>
 
-<!-- SCREEN 2 -->
+<!-- SCREEN 2 : NAMA & USIA -->
 <section class="screen" id="screen-2">
   <h2>🤍 Mari berkenalan</h2>
-  <input id="name" placeholder="Nama Anda"/>
-  <input id="age" placeholder="Usia Anda (dirancang untuk usia 40–59 tahun)"/>
+
+  <input 
+    id="name"
+    type="text"
+    placeholder="Nama Anda"
+  />
+
+  <input 
+    id="age"
+    type="number"
+    placeholder="Usia Anda (dirancang untuk usia 40–59 tahun)"
+  />
+
   <div class="nav">
-    <button class="secondary" onclick="goTo(1)">Kembali</button>
     <button onclick="goTo(3)">Lanjut</button>
   </div>
 </section>
 
-<!-- SCREEN 3 -->
+<!-- SCREEN 3 : PERAN -->
 <section class="screen" id="screen-3">
   <h2>🌱 Saat ini, apa peran utama Anda?</h2>
 
@@ -57,65 +67,75 @@
   <div class="option" onclick="pick(this)">Caregiver keluarga</div>
   <div class="option" onclick="pick(this)">Lainnya</div>
 
-  <input id="customJob" placeholder="Tuliskan peran Anda" style="display:none"/>
+  <input 
+    id="customJob"
+    type="text"
+    placeholder="Tuliskan peran Anda"
+    style="display:none"
+  />
 
   <div class="nav">
-    <button class="secondary" onclick="goTo(2)">Kembali</button>
     <button onclick="goTo(4)">Mulai</button>
   </div>
 </section>
 
-<!-- SCREEN 4 -->
+<!-- SCREEN 4 : PERTANYAAN -->
 <section class="screen" id="screen-4">
-  <h2>🕊️ Jawablah dengan jujur</h2>
-  <p class="soft">Tidak ada jawaban benar atau salah.</p>
+  <h2>🕊️ Luangkan sejenak untuk menjawab</h2>
+  <p class="soft">
+    Tidak ada jawaban benar atau salah.<br>
+    Kami menghargai setiap kejujuran yang Anda bagikan.
+  </p>
   <div id="questions"></div>
   <button onclick="checkAnswers()">Lihat Refleksi</button>
 </section>
 
-<!-- SCREEN 5 -->
+<!-- SCREEN 5 : HASIL -->
 <section class="screen" id="screen-5">
   <h2>✨ Refleksi Anda</h2>
   <div id="result"></div>
   <button onclick="goTo(6)">Lanjutkan</button>
 </section>
 
-<!-- SCREEN 6 -->
+<!-- SCREEN 6 : TRANSISI -->
 <section class="screen" id="screen-6">
   <h2>🤍 Kini, kita bisa berjalan bersama</h2>
   <p class="soft">
-    Restore 40+ bukan untuk memperbaiki Anda,<br>
+    Restore 40+ hadir untuk berjalan bersama Anda,
+    memberi ruang aman untuk beristirahat, merefleksi, dan kembali utuh. <br>
     tetapi menemani Anda pulih secara utuh.
   </p>
   <input placeholder="Nomor HP Anda"/>
-  <button>Submit</button>
   <button onclick="goTo(7)">Mulai Perjalanan</button>
 </section>
 
-<!-- SCREEN 7 -->
+<!-- SCREEN 7 : DAFTAR HARI -->
 <section class="screen" id="screen-7">
   <h2>🌿 Mari kita mulai proses pemulihan Anda</h2>
-  <div class="day active" onclick="openDay(1)">Day 1 · Mental Rest</div>
-  <div class="day locked">Day 2 · Physical Rest</div>
-  <div class="day locked">Day 3 · Sensory Rest</div>
-  <div class="day locked">Day 4 · Spiritual & Social Rest</div>
-  <div class="day locked">Day 5 · Creative Rest</div>
+
+  <div class="day active" onclick="openDay(1)">Hari 1</div>
+  <div class="day locked" onclick="openDay(2)">Hari 2</div>
+  <div class="day locked" onclick="openDay(3)">Hari 3</div>
+  <div class="day locked" onclick="openDay(4)">Hari 4</div>
+  <div class="day locked" onclick="openDay(5)">Hari 5</div>
 </section>
 
 <!-- DAY DETAIL -->
 <section class="screen" id="screen-day">
   <h2 id="dayTitle"></h2>
   <p id="dayIntro" class="soft"></p>
-  <ul id="journalPrompts"></ul>
-  <textarea id="journalText" rows="6" placeholder="Tuliskan refleksi Anda di sini..."></textarea>
-  <button onclick="submitJournal()">Submit</button>
+
+  <ul id="dayGuidance"></ul>
+
+  <button onclick="nextDay()">Lanjutkan</button>
 </section>
 
 <!-- FINAL -->
 <section class="screen" id="screen-final">
   <h2>🌱 Terima kasih telah berjalan sejauh ini</h2>
   <p class="soft">
-    Bagaimana perjalanan 5 hari pemulihan Anda bersama kami?
+    Anda telah menyelesaikan perjalanan 5 hari<br>
+    dengan ritme Anda sendiri.
   </p>
   <div id="packages"></div>
 </section>
