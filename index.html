@@ -89,19 +89,18 @@ SCREEN 4 – PERTANYAAN
 ===================================================== -->
 <section class="screen" id="screen-4">
   <h2>🌿 Luangkan sejenak untuk menjawab</h2>
-
   <p class="soft">
-    Luangkan sejenak untuk menjawab sesuai dengan apa yang Anda rasakan saat ini.<br>
-    Tidak ada jawaban benar atau salah. Kami menghargai setiap kejujuran yang dibagikan.
+    Tidak ada jawaban benar atau salah.<br />
+    Kami menghargai setiap kejujuran yang Anda bagikan.
   </p>
 
-  <!-- PERTANYAAN DI-RENDER VIA questions.js -->
-  <div id="questionContainer"></div>
+  <div id="questions"></div>
 
-  <button class="primary" id="submitBtn" onclick="submitAnswers()" disabled>
-   Lihat Refleksi
+  <button class="primary" onclick="checkAnswers()">
+    Lihat Refleksi
   </button>
 </section>
+
 
 <!-- =====================================================
 SCREEN 5 – HASIL REFLEKSI
