@@ -9,11 +9,8 @@ const packageBox = document.getElementById("packages");
 let answers = {};
 let scores = {};
 let dominantRests = [];
+
 let currentDay = 1;
-
-let selectedJob = "";
-let customJob = "";
-
 let activeDayContent = null;
 
 /* ======================================================
@@ -21,14 +18,8 @@ NAVIGASI LAYAR
 ====================================================== */
 function goTo(id) {
   screens.forEach(s => s.classList.remove("active"));
-
   const target = document.getElementById(`screen-${id}`);
-  if (!target) {
-    console.error("Screen tidak ditemukan:", id);
-    return;
-  }
-
-  target.classList.add("active");
+  if (target) target.classList.add("active");
   window.scrollTo(0, 0);
 }
 
@@ -41,19 +32,6 @@ function pick(el) {
   );
 
   el.classList.add("active");
-  selectedJob = el.innerText.trim();
-
-  const customInput = document.getElementById("customJob");
-  if (selectedJob === "Lainnya") {
-    customInput.style.display = "block";
-  } else {
-    customInput.style.display = "none";
-    customJob = "";
-  }
-}
-
-function saveCustomJob(val) {
-  customJob = val;
 }
 
 /* ======================================================
@@ -71,8 +49,7 @@ questions.forEach(q => {
 });
 
 function answer(id, dim, val, el) {
-  const key = String(id);
-  answers[key] = { dim, val };
+  answers[id] = { dim, val };
 
   const parent = el.parentElement;
   parent.querySelectorAll(".answer-btn").forEach(b =>
@@ -82,10 +59,11 @@ function answer(id, dim, val, el) {
 }
 
 /* ======================================================
-HITUNG SKOR & TENTUKAN SACRED REST
+HITUNG SKOR & TENTUKAN ISTIRAHAT DOMINAN
 ====================================================== */
 function checkAnswers() {
-  if (Object.keys(answers).length < questions.length) {
+  const unanswered = questions.filter(q => !answers[q.id]);
+  if (unanswered.length > 0) {
     alert("🌿 Masih ada pernyataan yang belum dijawab.");
     return;
   }
@@ -99,14 +77,14 @@ function checkAnswers() {
     .sort((a, b) => scores[b] - scores[a])
     .slice(0, 2);
 
-  renderResult();
   setActiveDayContent();
+  renderResult();
+  renderDayList();
   goTo(5);
-
 }
 
 /* ======================================================
-SET PROGRAM HARI BERDASARKAN SACRED REST
+SET PROGRAM 5 HARI BERDASARKAN HASIL
 ====================================================== */
 function setActiveDayContent() {
   const main = dominantRests[0];
@@ -138,57 +116,66 @@ HASIL REFLEKSI
 function renderResult() {
   const reflection = {
     Fisik: `
-      🌿 Tubuh Anda telah bekerja cukup lama tanpa jeda.
+      🌿 Tubuh Anda tampaknya telah bekerja cukup lama tanpa banyak jeda.
       <br><br>
-      <strong>Yuk mulai pelan-pelan:</strong> dengarkan tubuh tanpa memaksanya terus kuat.
+      <strong>Nggak apa-apa, yuk mulai dari sini:</strong>
+      Kita pelankan ritme dan dengarkan tubuh dengan lembut.
     `,
     Mental: `
-      🧠 Pikiran Anda terus aktif bahkan saat tubuh ingin berhenti.
+      🕊️ Pikiran Anda terus aktif bahkan saat ingin berhenti.
       <br><br>
-      <strong>Hari ini:</strong> tidak semua hal harus dipikirkan.
-    `,
-    Emosional: `
-      💛 Ada perasaan yang lama disimpan sendiri.
-      <br><br>
-      <strong>Cukup akui dulu</strong>, tanpa harus menjelaskannya.
+      <strong>Nggak apa-apa, yuk mulai dari sini:</strong>
+      Tidak semua hal harus dipikirkan hari ini.
     `,
     Sensorik: `
       🌱 Indra Anda terlalu lama sibuk.
       <br><br>
-      <strong>Berikan jeda</strong> pada layar dan suara.
+      <strong>Nggak apa-apa, yuk mulai dari sini:</strong>
+      Beri mata dan telinga jeda sebentar.
     `,
     Relasi: `
       🤍 Anda banyak hadir untuk orang lain.
       <br><br>
-      <strong>Hari ini</strong>, izinkan diri sendiri hadir.
+      <strong>Nggak apa-apa, yuk mulai dari sini:</strong>
+      Dekatlah dengan relasi yang terasa aman.
     `,
     Ekspresif: `
       ✨ Bagian diri yang menikmati hal sederhana masih ada.
       <br><br>
-      <strong>Lakukan satu hal kecil</strong> tanpa target.
+      <strong>Nggak apa-apa, yuk mulai dari sini:</strong>
+      Lakukan satu hal kecil yang Anda suka.
     `,
     Spiritual: `
-      🕊️ Anda mungkin rindu berhenti sejenak.
+      🕯️ Ada kerinduan untuk berhenti sejenak.
       <br><br>
-      <strong>Diam sejenak</strong> juga sudah cukup.
+      <strong>Nggak apa-apa, yuk mulai dari sini:</strong>
+      Diam atau doa sederhana sudah cukup.
     `
   };
 
   let html = `<p><strong>Refleksi untuk Anda 🌿</strong></p>`;
   html += `<p>${reflection[dominantRests[0]]}</p>`;
 
-  if (dominantRests[1]) {
-    html += `<p>${reflection[dominantRests[1]]}</p>`;
-  }
-
-  html += `
-    <p class="soft">
-      Refleksi ini bukan penilaian,
-      melainkan undangan untuk merawat diri.
-    </p>
-  `;
-
   resultBox.innerHTML = html;
+}
+
+/* ======================================================
+RENDER LIST DAY (AUTO LOCK)
+====================================================== */
+function renderDayList() {
+  const list = document.getElementById("dayList");
+  list.innerHTML = "";
+
+  currentDay = 1;
+
+  for (let i = 1; i <= 5; i++) {
+    list.innerHTML += `
+      <div class="day ${i === 1 ? "active" : "locked"}"
+           onclick="openDay(${i})">
+        Day ${i}
+      </div>
+    `;
+  }
 }
 
 /* ======================================================
@@ -213,19 +200,21 @@ function openDay(day) {
 }
 
 function nextDay() {
-  currentDay++;
-
   const days = document.querySelectorAll(".day");
-  if (days[currentDay - 1]) {
-    days[currentDay - 1].classList.remove("locked");
-  }
+
+  days[currentDay - 1]?.classList.remove("active");
+  currentDay++;
 
   if (currentDay > 5) {
     renderPackages();
     goTo("final");
-  } else {
-    openDay(currentDay);
+    return;
   }
+
+  days[currentDay - 1]?.classList.remove("locked");
+  days[currentDay - 1]?.classList.add("active");
+
+  openDay(currentDay);
 }
 
 /* ======================================================
@@ -234,7 +223,6 @@ PAKET
 function renderPackages() {
   const map = {
     Mental: "Tenang",
-    Emosional: "Tenang",
     Sensorik: "Tenang",
     Relasi: "Bertumbuh",
     Spiritual: "Bertumbuh",
@@ -247,7 +235,7 @@ function renderPackages() {
   packageBox.innerHTML = `
     <p class="soft">
       Berdasarkan refleksi Anda,
-      paket ini mungkin paling relevan 🌿
+      paket berikut mungkin paling relevan 🌿
     </p>
     ${renderPackage("Tenang", recommended)}
     ${renderPackage("Bertumbuh", recommended)}
