@@ -20,6 +20,9 @@ function goTo(screenNumber) {
   document
     .getElementById(`screen-${currentScreen}`)
     ?.classList.add("active");
+   if (currentScreen === 4) {
+    renderQuestions();
+  }
 }
 
 function showLaterMessage() {
@@ -104,6 +107,10 @@ function selectAnswer(id, category, value, el) {
   const siblings = el.parentElement.querySelectorAll(".option");
   siblings.forEach(s => s.classList.remove("active"));
   el.classList.add("active");
+   // 🔑 cek apakah semua sudah dijawab
+  if (Object.keys(answers).length === questions.length) {
+    document.getElementById("submitBtn").disabled = false;
+  }
 }
 
 /* ======================================================
